@@ -2,7 +2,8 @@
 import logging
 import os
 from logging.handlers import SMTPHandler, RotatingFileHandler
-#
+from celery import Celery
+
 import click
 from flask import Flask, render_template, request
 # from flask_login import current_user
@@ -14,14 +15,12 @@ from flask import Flask, render_template, request
 # from bluelog.blueprints.blog import blog_bp
 # from bluelog.extensions import bootstrap, db, login_manager, csrf, ckeditor, mail, moment, toolbar, migrate
 # from bluelog.models import Admin, Post, Category, Comment, Link
-from newsdph.settings import config
+from newsdph.settings import config, CeleryConfig
 
 basedir = os.path.abspath(os.path.dirname(os.path.dirname(__file__)))
 
 
 DEFAULT_APP_NAME = 'newsdph'
-
-
 
 
 def create_app(config_name):

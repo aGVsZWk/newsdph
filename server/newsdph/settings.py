@@ -16,6 +16,41 @@ class Operations:
     RESET_PASSWORD = 'reset-password'
     CHANGE_EMAIL = 'change-email'
 
+
+class CeleryConfig(object):
+    broker_url = os.getenv('CELERY_BROKER_URL')
+    result_backend = os.getenv('CELERY_RESULT_BACKEND')
+    include = ['newsdph.tasks']
+    # result_accept_content = ['json']
+    # task_serializer = 'json'
+    # enable_utc = True
+    # task_track_started = True
+    # broker_connection_max_retries = 0
+    # worker_prefetch_multiplier = 1
+    # worker_send_task_events = 1
+    # task_reject_on_worker_lost = True
+    # task_acks_late = True
+    # worker_max_tasks_per_child = 10
+    # broker_pool_limit = None
+    # task_ignore_result = True
+    # broker_transport_options = {'visibility_timeout': 86400}
+    # task_default_queue = 'default'
+    # task_queues = {
+    #     'push': {
+    #         "exchange": "push",
+    #         "routing_key": "push"
+    #     },
+    #     'cloud': {
+    #         "exchange": "cloud",
+    #         "routing_key": "cloud"
+    #     },
+    #     'data': {
+    #         "exchange": "data",
+    #         "routing_key": "data"
+    #     }
+    # }
+
+
 class BaseConfig(object):
     SECRET_KEY = os.getenv('SECRET_KEY', 'dev key')
 
@@ -23,7 +58,7 @@ class BaseConfig(object):
 
     SQLALCHEMY_TRACK_MODIFICATIONS = False
     SQLALCHEMY_RECORD_QUERIES = True
-    SQLALCHEMY_COMMIT_ON_TEARDOWN = True # 当链接关闭的时候，会自动提交
+    SQLALCHEMY_COMMIT_ON_TEARDOWN = True  # 当链接关闭的时候，会自动提交
 
     CKEDITOR_ENABLE_CSRF = True
     CKEDITOR_FILE_UPLOADER = 'admin.upload_image'
@@ -67,7 +102,6 @@ class BaseConfig(object):
     #     ALBUMY_PHOTO_SIZE['medium']: '_m',  # display
     # }
 
-
     # BLUELOG_EMAIL = os.getenv('BLUELOG_EMAIL')
     # BLUELOG_POST_PER_PAGE = 10
     # BLUELOG_MANAGE_POST_PER_PAGE = 15
@@ -82,7 +116,7 @@ class BaseConfig(object):
 
 class DevelopmentConfig(BaseConfig):
     SQLALCHEMY_DATABASE_URI = prefix + os.path.join(basedir, 'data-dev.db')
-    #session配置
+    # session配置
     # SESSION_TYPE = "redis"
     # SESSION_REDIS = redis.StrictRedis(host=REIDS_HOST,port=REDIS_PORT)
     # SESSION_USE_SIGNER = True
