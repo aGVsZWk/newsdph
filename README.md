@@ -133,5 +133,3 @@ $ fab deploy
 [2]: https://www.nginx.com/
 [3]: http://gunicorn.org/
 [4]: http://supervisord.org/
-
-
