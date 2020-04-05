@@ -1,9 +1,9 @@
 # pipenv 虚拟环境激活报错
 
 使用命令：
-"""
+```bash
 pipenv --three --python=`which python3`
-"""
+```
 
 # celery 启动：
 
@@ -14,3 +14,11 @@ pipenv --three --python=`which python3`
 后台停止：`celery multi stop 1 -A newsdph.proj -l info`
 
 其中的数字为节点数，可指定范围
+
+
+# 解决 ubuntu 下 yarn 无法使用问题
+```bash
+curl -sL https://deb.nodesource.com/setup_10.x | sudo -E bash -
+
+apt-get install -y nodejs
+```
