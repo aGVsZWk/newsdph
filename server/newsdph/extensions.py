@@ -3,18 +3,17 @@ from flask_ckeditor import CKEditor
 from flask_sqlalchemy import SQLAlchemy
 from flask_wtf import CSRFProtect
 from flask_debugtoolbar import DebugToolbarExtension
-from flask_migrate import Migrate
+# from flask_migrate import Migrate
 from flask_avatars import Avatars
-from flask_bootstrap import Bootstrap
+# from flask_bootstrap import Bootstrap
 from flask_dropzone import Dropzone
 from flask_login import LoginManager, AnonymousUserMixin
 from flask_mail import Mail
 from flask_moment import Moment
-from flask_sqlalchemy import SQLAlchemy
 from flask_whooshee import Whooshee
-from flask_wtf import CSRFProtect
 from flask_socketio import SocketIO
-from flask_oauthlib.client import OAuth
+from authlib.flask.client import OAuth
+
 
 db = SQLAlchemy()
 login_manager = LoginManager()
@@ -23,7 +22,7 @@ ckeditor = CKEditor()
 mail = Mail()
 moment = Moment()
 toolbar = DebugToolbarExtension()
-migrate = Migrate()
+# migrate = Migrate()
 dropzone = Dropzone()
 whooshee = Whooshee()
 avatars = Avatars()

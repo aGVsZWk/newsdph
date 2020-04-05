@@ -14,6 +14,7 @@ from flask import Flask, render_template, request
 # from bluelog.blueprints.auth import auth_bp
 # from bluelog.blueprints.blog import blog_bp
 # from bluelog.extensions import bootstrap, db, login_manager, csrf, ckeditor, mail, moment, toolbar, migrate
+from newsdph.extensions import db, login_manager, csrf, ckeditor, mail, moment, toolbar, dropzone, whooshee, avatars, socketio, oauth
 # from bluelog.models import Admin, Post, Category, Comment, Link
 from newsdph.settings import config, CeleryConfig
 
@@ -30,7 +31,7 @@ def create_app(config_name):
     app.config.from_object(config[config_name])
 
     register_logging(app)
-    # register_extensions(app)
+    register_extensions(app)
     # register_blueprints(app)
     # register_commands(app)
     # register_errors(app)
@@ -78,10 +79,15 @@ def register_extensions(app):
     db.init_app(app)
     login_manager.init_app(app)
     csrf.init_app(app)
-    # ckeditor.init_app(app)
+    ckeditor.init_app(app)
     mail.init_app(app)
-    # moment.init_app(app)
-    # toolbar.init_app(app)
+    moment.init_app(app)
+    toolbar.init_app(app)
+    dropzone.init_app(app)
+    whooshee.init_app(app)
+    avatars.init_app(app)
+    socketio.init_app(app)
+    oauth.init_app(app)
     # migrate.init_app(app, db)
 
 
