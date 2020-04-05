@@ -3,8 +3,8 @@
 from flask import Blueprint, abort
 from flask_login import current_user
 
-from catchat.extensions import db
-from catchat.models import User
+from newsdph.extensions import db
+from newsdph.models import User
 
 admin_bp = Blueprint('admin', __name__)
 

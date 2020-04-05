@@ -11,8 +11,18 @@ try:
 except ImportError:
     from urllib.parse import urlparse, urljoin
 
-from flask import request, redirect, url_for, current_app
+from flask import request, redirect, url_for, current_app, flash
+import os
+import uuid
 
+import PIL
+from PIL import Image
+from itsdangerous import BadSignature, SignatureExpired
+from itsdangerous import TimedJSONWebSignatureSerializer as Serializer
+
+from newsdph.extensions import db
+from newsdph.models import User
+from newsdph.settings import Operations
 
 def is_safe_url(target):
     ref_url = urlparse(request.host_url)
@@ -76,23 +86,7 @@ class Pagination(object):
 
 
 
-import os
-import uuid
 
-try:
-    from urlparse import urlparse, urljoin
-except ImportError:
-    from urllib.parse import urlparse, urljoin
-
-import PIL
-from PIL import Image
-from flask import current_app, request, url_for, redirect, flash
-from itsdangerous import BadSignature, SignatureExpired
-from itsdangerous import TimedJSONWebSignatureSerializer as Serializer
-
-from albumy.extensions import db
-from albumy.models import User
-from albumy.settings import Operations
 
 
 def generate_token(user, operation, expire_in=None, **kwargs):

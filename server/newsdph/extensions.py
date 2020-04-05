@@ -12,7 +12,7 @@ from flask_mail import Mail
 from flask_moment import Moment
 from flask_whooshee import Whooshee
 from flask_socketio import SocketIO
-from authlib.flask.client import OAuth
+from authlib.integrations.flask_client import OAuth
 
 
 db = SQLAlchemy()

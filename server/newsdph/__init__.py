@@ -10,9 +10,12 @@ from flask import Flask, render_template, request
 # from flask_sqlalchemy import get_debug_queries
 # from flask_wtf.csrf import CSRFError
 
-# from bluelog.blueprints.admin import admin_bp
-# from bluelog.blueprints.auth import auth_bp
-# from bluelog.blueprints.blog import blog_bp
+from newsdph.blueprints.admin import admin_bp
+from newsdph.blueprints.auth import auth_bp
+from newsdph.blueprints.users import users_bp
+# from newsdph.blueprints.main import main_bp
+
+
 # from bluelog.extensions import bootstrap, db, login_manager, csrf, ckeditor, mail, moment, toolbar, migrate
 from newsdph.extensions import db, login_manager, csrf, ckeditor, mail, moment, toolbar, dropzone, whooshee, avatars, socketio, oauth
 # from bluelog.models import Admin, Post, Category, Comment, Link
@@ -32,7 +35,7 @@ def create_app(config_name):
 
     register_logging(app)
     register_extensions(app)
-    # register_blueprints(app)
+    register_blueprints(app)
     # register_commands(app)
     # register_errors(app)
     # register_shell_context(app)
@@ -91,10 +94,12 @@ def register_extensions(app):
     # migrate.init_app(app, db)
 
 
-# def register_blueprints(app):
-#     app.register_blueprint(blog_bp)
-#     app.register_blueprint(admin_bp, url_prefix='/admin')
-#     app.register_blueprint(auth_bp, url_prefix='/auth')
+def register_blueprints(app):
+    app.register_blueprint(users_bp)
+    app.register_blueprint(admin_bp, url_prefix='/admin')
+    app.register_blueprint(auth_bp, url_prefix='/auth')
+
+
     # register blueprints
     # for bp in blueprints:
     #     app.register_blueprint(bp)

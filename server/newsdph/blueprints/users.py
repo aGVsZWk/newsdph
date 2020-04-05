@@ -1,6 +1,6 @@
 import flask
 from flask import jsonify, request
-from server.utils import Pagination
+from newsdph.utils import Pagination
 
 users_bp = flask.Blueprint(
     'users',

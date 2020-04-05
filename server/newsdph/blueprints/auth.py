@@ -8,12 +8,12 @@
 from flask import render_template, flash, redirect, url_for, Blueprint
 from flask_login import login_user, logout_user, login_required, current_user, login_fresh, confirm_login
 
-from albumy.emails import send_confirm_email, send_reset_password_email
-from albumy.extensions import db
-from albumy.forms.auth import LoginForm, RegisterForm, ForgetPasswordForm, ResetPasswordForm
-from albumy.models import User
-from albumy.settings import Operations
-from albumy.utils import generate_token, validate_token, redirect_back
+from newsdph.emails import send_confirm_email, send_reset_password_email
+from newsdph.extensions import db
+# from newsdph.forms.auth import LoginForm, RegisterForm, ForgetPasswordForm, ResetPasswordForm
+from newsdph.models import User
+from newsdph.settings import Operations
+from newsdph.utils import generate_token, validate_token, redirect_back
 
 auth_bp = Blueprint('auth', __name__)
 
@@ -21,7 +21,7 @@ auth_bp = Blueprint('auth', __name__)
 @auth_bp.route('/login', methods=['GET', 'POST'])
 def login():
     if current_user.is_authenticated:
-        return redirect(url_for('main.index'))
+        return redirect(url_for('users.get_all_users'))
 
     form = LoginForm()
     if form.validate_on_submit():
