@@ -113,9 +113,11 @@ class BaseConfig(object):
     # BLUELOG_UPLOAD_PATH = os.path.join(basedir, 'uploads')
     # BLUELOG_ALLOWED_IMAGE_EXTENSIONS = ['png', 'jpg', 'jpeg', 'gif']
 
+    NEWSDPH_ADMIN_EMAIL = '2571117816@qq.com'
 
 class DevelopmentConfig(BaseConfig):
-    SQLALCHEMY_DATABASE_URI = prefix + os.path.join(basedir, 'data-dev.db')
+    # SQLALCHEMY_DATABASE_URI = prefix + os.path.join(basedir, 'data-dev.db')
+    SQLALCHEMY_DATABASE_URI = os.getenv("SQLALCHEMY_DATABASE_URI")
     # session配置
     # SESSION_TYPE = "redis"
     # SESSION_REDIS = redis.StrictRedis(host=REIDS_HOST,port=REDIS_PORT)

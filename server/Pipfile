@@ -27,6 +27,7 @@ flask-avatars = "*"
 werkzeug = "*"
 authlib = "*"
 flask-cors = "*"
+pymysql = "*"
 
 [requires]
 python_version = "3.6"
