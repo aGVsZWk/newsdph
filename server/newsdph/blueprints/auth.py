@@ -22,7 +22,7 @@ auth_bp = Blueprint('auth', __name__)
 def login():
     # if current_user.is_authenticated:
     #     return redirect(url_for('users.get_all_users'))
-    #
+
     # form = LoginForm()
     # if form.validate_on_submit():
     #     user = User.query.filter_by(email=form.email.data.lower()).first()
