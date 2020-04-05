@@ -16,7 +16,7 @@ class CommonHttp {
     }
 
     createRequestUrl(url, method, params) {
-        const baseUrl = "http://localhost:2345/api"
+        const baseUrl = "http://127.0.0.1:8000"
         let targetUrl = ''
         if (method === "get"){
             let parasPartOfUrl = ''

@@ -5,7 +5,7 @@
     :copyright: © 2018 Grey Li <withlihui@gmail.com>
     :license: MIT, see LICENSE for more details.
 """
-from flask import render_template, flash, redirect, url_for, Blueprint
+from flask import render_template, flash, redirect, url_for, Blueprint, jsonify
 from flask_login import login_user, logout_user, login_required, current_user, login_fresh, confirm_login
 
 from newsdph.emails import send_confirm_email, send_reset_password_email
@@ -20,21 +20,23 @@ auth_bp = Blueprint('auth', __name__)
 
 @auth_bp.route('/login', methods=['GET', 'POST'])
 def login():
-    if current_user.is_authenticated:
-        return redirect(url_for('users.get_all_users'))
-
-    form = LoginForm()
-    if form.validate_on_submit():
-        user = User.query.filter_by(email=form.email.data.lower()).first()
-        if user is not None and user.validate_password(form.password.data):
-            if login_user(user, form.remember_me.data):
-                flash('Login success.', 'info')
-                return redirect_back()
-            else:
-                flash('Your account is blocked.', 'warning')
-                return redirect(url_for('main.index'))
-        flash('Invalid email or password.', 'warning')
-    return render_template('auth/login.html', form=form)
+    # if current_user.is_authenticated:
+    #     return redirect(url_for('users.get_all_users'))
+    #
+    # form = LoginForm()
+    # if form.validate_on_submit():
+    #     user = User.query.filter_by(email=form.email.data.lower()).first()
+    #     if user is not None and user.validate_password(form.password.data):
+    #         if login_user(user, form.remember_me.data):
+    #             flash('Login success.', 'info')
+    #             return redirect_back()
+    #         else:
+    #             flash('Your account is blocked.', 'warning')
+    #             return redirect(url_for('main.index'))
+    #     flash('Invalid email or password.', 'warning')
+    # return render_template('auth/login.html', form=form)
+    data = {"code": 200, "data": {"token": "asdsad", "user": {"name": "asdasd", "age": 18}}}
+    return jsonify(data)
 
 
 @auth_bp.route('/re-authenticate', methods=['GET', 'POST'])

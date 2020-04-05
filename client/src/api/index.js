@@ -5,5 +5,8 @@ const getUserList = (params) => {
 	return http('/users/all', 'get', params)
 }
 
+const login = (data) => {
+    return http('/auth/login', 'post', data)
+}
 
-export default getUserList
+export default login

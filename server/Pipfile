@@ -26,6 +26,7 @@ flask-socketio = "*"
 flask-avatars = "*"
 werkzeug = "*"
 authlib = "*"
+flask-cors = "*"
 
 [requires]
 python_version = "3.6"

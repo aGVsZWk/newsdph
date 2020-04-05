@@ -13,7 +13,7 @@ from flask_moment import Moment
 from flask_whooshee import Whooshee
 from flask_socketio import SocketIO
 from authlib.integrations.flask_client import OAuth
-
+from flask_cors import CORS
 
 db = SQLAlchemy()
 login_manager = LoginManager()
@@ -28,7 +28,7 @@ whooshee = Whooshee()
 avatars = Avatars()
 socketio = SocketIO()
 oauth = OAuth()
-
+cors = CORS()
 
 @login_manager.user_loader
 def load_user(user_id):
