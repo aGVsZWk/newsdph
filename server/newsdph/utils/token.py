@@ -18,10 +18,10 @@ from newsdph.settings import Operations
 
 
 
-def generate_token(user, operation, expire_in=None, **kwargs):
+def generate_token(id, operation, expire_in=None, **kwargs):
     s = Serializer(current_app.config['SECRET_KEY'], expire_in)
 
-    data = {'id': user.id, 'operation': operation}
+    data = {'id': id, 'operation': operation}
     data.update(**kwargs)
     return s.dumps(data)
 

@@ -7,7 +7,8 @@ POST
 ```json
 {
     "username": "askhdqwe",
-    "password": "asdasdasd"
+    "password": "asdasdasd",
+    "remember": 1
 }
 ```
 
@@ -19,10 +20,13 @@ POST
         "id": 1,
         "token":"eyasdasd.asdasdasd.asdasd",
         "status":1
+
     }
 }
 ```
 
+
+`curl 127.0.0.1:8000/auth/login -X POST -d '{"email": "2571117816@qq.com", "password": "123456", "remember":1}' --header "Content-Type: application/json"`
 # 获取用户信息
 
 url: `/user/profile?id=`

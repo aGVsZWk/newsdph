@@ -6,11 +6,13 @@ except ImportError:
 from flask import request, redirect, url_for, current_app, flash
 import os
 import uuid
-
+import requests
 import PIL
 from PIL import Image
 from itsdangerous import BadSignature, SignatureExpired
 from itsdangerous import TimedJSONWebSignatureSerializer as Serializer
+import tarfile
+import zipfile
 
 from newsdph.extensions import db
 from newsdph.models import User
@@ -34,3 +36,30 @@ def resize_image(image, filename, base_width):
     filename += current_app.config['ALBUMY_PHOTO_SUFFIX'][base_width] + ext
     img.save(os.path.join(current_app.config['ALBUMY_UPLOAD_PATH'], filename), optimize=True, quality=85)
     return filename
+
+
+
+def compress_file_list(input_file_list, out_file_path):
+    """
+    :param input_file_list:
+    :param out_file_path:
+    :return:
+    """
+    with tarfile.open(out_file_path, "w:") as tar:
+        for file_path in input_file_list:
+            tar.add(file_path, arcname=os.path.basename(file_path))
+
+
+def uzip_zip_file(zip_file_path, file_dir):
+    with zipfile.ZipFile(zip_file_path, "r") as z:
+        for f in z.namelist():
+            z.extract(f, file_dir)
+
+
+
+def download_with_url(url, file_path):
+    r = requests.get(url, stream=True)
+    with open(file_path, "wb") as f:
+        for chunk in r.iter_content(chunk_size=1024):
+            if chunk:
+                f.write(chunk)

@@ -6,7 +6,7 @@ from flask_login import UserMixin, AnonymousUserMixin
 from werkzeug.security import generate_password_hash, check_password_hash
 
 from newsdph.extensions import login_manager, db
-from newsdph.dbutils import execute, fetch_to_dict
+from newsdph.utils.db import execute, fetch_to_dict
 
 
 class User(UserMixin):
@@ -32,11 +32,12 @@ class User(UserMixin):
 
     def set_password(self, password):
         self.password_hash = generate_password_hash(password)
-        sql = "update user set password = '%s' where id= '%s'" % (self.password_hash, self.id)
+        sql = "update user set password = :password where id= :id"
+        params = {"password":self.password_hash, "id":self.id}
+        execute(sql, params)
 
-
-    def verify_password(self, password):
-        return check_password_hash(self.password_hash, password)
+    def validate_password(self, password):
+        return check_password_hash(password, self.password_hash)
 
     def generate_email_hash(self):
         if self.email is not None and self.email_hash is None:
