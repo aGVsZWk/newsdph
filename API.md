@@ -67,7 +67,8 @@ POST
     "email":"qqqq@qq.com",
     "username":"xxxxx",
     "password":"xxxxx",
-    "name":"李老大"
+    "name":"李老大",
+    "sms": "123456"
 }
 ```
 
@@ -80,6 +81,29 @@ POST
     }
 }
 ```
+
+# 注册发--短信--邮箱验证码
+
+url: `/auth/verify`
+
+POST
+
+```json
+{
+    "email": "2571117816@qq.com"
+}
+```
+
+```json
+{
+    "code": 200,
+    "msg":"铁憨憨!验证码已发送至邮箱，有效期3分钟！",
+    "payload":{
+        "status":1
+    }
+}
+```
+
 
 # 激活
 

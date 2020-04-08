@@ -37,7 +37,7 @@ class User(UserMixin):
         execute(sql, params)
 
     def validate_password(self, password):
-        return check_password_hash(password, self.password_hash)
+        return check_password_hash(self.password_hash, password)
 
     def generate_email_hash(self):
         if self.email is not None and self.email_hash is None:

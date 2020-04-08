@@ -5,6 +5,8 @@ from newsdph.extensions import db
 from newsdph.settings import Operations
 from newsdph.utils.token import generate_token, validate_token
 from newsdph.utils.response import make_response
+from newsdph.utils.uid import get_capta
+
 auth_bp = Blueprint('auth', __name__)
 
 
@@ -19,7 +21,6 @@ def login():
         "id": None,
         "token": None
     }
-    # user.set_password(password)
     t1 = user.validate_password(password)
     t2= login_user(user, remember=remember)
     print(t1, t2)
@@ -29,3 +30,17 @@ def login():
 
         return make_response(data, status=1)
     return make_response(data=data, status=0)
+
+
+@app.route('/verify')
+def verify():
+    email = request.data.get('email')
+    code = get_capta(length=12)
+    
+    return make_response('', 1)
+
+
+@app.route('/register', methods=['POST'])
+def register():
+    pass
+    return render_template('expression')
