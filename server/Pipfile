@@ -28,6 +28,8 @@ werkzeug = "*"
 authlib = "*"
 flask-cors = "*"
 pymysql = "*"
+gunicorn = "*"
+flask-redis = "*"
 
 [requires]
 python_version = "3.6"

@@ -14,6 +14,7 @@ from flask_whooshee import Whooshee
 from flask_socketio import SocketIO
 from authlib.integrations.flask_client import OAuth
 from flask_cors import CORS
+from flask_redis import FlaskRedis
 
 db = SQLAlchemy()
 login_manager = LoginManager()
@@ -29,6 +30,7 @@ avatars = Avatars()
 socketio = SocketIO()
 oauth = OAuth()
 cors = CORS()
+redis_client = FlaskRedis()
 
 @login_manager.user_loader
 def load_user(user_id):

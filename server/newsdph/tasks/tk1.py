@@ -10,6 +10,9 @@ def add(x, y):
     time.sleep(1)
     return x + y
 
+
+
+
 @proj.task(bind=True)
 def long_task(self):
     """Background task that runs a long function with progress reports."""

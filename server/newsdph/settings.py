@@ -70,7 +70,7 @@ class BaseConfig(object):
     MAIL_PASSWORD = os.getenv('MAIL_PASSWORD')
     MAIL_DEFAULT_SENDER = ('Newsdph Admin', MAIL_USERNAME)
 
-    REDIS_URL = "redis://localhost"
+    REDIS_URL = os.getenv('REDIS_URL')
 
     DROPZONE_ALLOWED_FILE_TYPE = 'image'
     DROPZONE_MAX_FILE_SIZE = 3
@@ -79,6 +79,7 @@ class BaseConfig(object):
 
     WHOOSHEE_MIN_STRING_LEN = 1
 
+    VERIFY_CODE_LIFETIME = 30     # 验证码有效期
     # AVATARS_SAVE_PATH = os.path.join(ALBUMY_UPLOAD_PATH, 'avatars')
     # AVATARS_SIZE_TUPLE = (30, 100, 200)
     # MAX_CONTENT_LENGTH = 3 * 1024 * 1024  # file size exceed to 3 Mb will return a 413 error response.
@@ -123,6 +124,7 @@ class DevelopmentConfig(BaseConfig):
     # SESSION_REDIS = redis.StrictRedis(host=REIDS_HOST,port=REDIS_PORT)
     # SESSION_USE_SIGNER = True
     # PERMANENT_SESSION_LIFETIME = 3600*24*2 # 两天有效期，默认是秒
+    # VERIFY_CODE_LIFETIME = 60     # 验证码有效期
 
 
 class TestingConfig(BaseConfig):
