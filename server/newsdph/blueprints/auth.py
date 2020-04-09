@@ -13,10 +13,10 @@ auth_bp = Blueprint('auth', __name__)
 
 @auth_bp.route('/login', methods=['POST'])
 def login():
-    email = request.json.get('email')   # todo 改成form;校验工作
+    username = request.json.get('username')
     password = request.json.get('password')
     remember = request.json.get('remember')
-    user = User(email)
+    user = User(username)
     data = {
         "id": None,
         "token": None
@@ -36,10 +36,20 @@ def verify():
     status = redis_client.setex(email, current_app.config['VERIFY_CODE_LIFETIME'], code)
     if status:
         send_verify_email(email, code)
-    return make_response('', status)
+    status_code = 1 if status else 0
+    return make_response('', status_code)
 
 
 @auth_bp.route('/register', methods=['POST'])
 def register():
-    pass
-    return render_template('expression')
+    email = request.json.get('email')
+    username = request.json.get('username')
+    password = request.json.get('password')
+    code = request.json.get('code')
+    print(code, redis_client.get(email))
+    if not redis_client.get(email):
+        return make_response('', 0)     # 验证码过期
+    if code != redis_client.get(email).decode():
+        return make_response('', 0)  # 验证码不存在
+    User.create(email, username, password)
+    return make_response('', 1)

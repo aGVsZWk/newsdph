@@ -11,9 +11,9 @@ from newsdph.utils.db import execute, fetch_to_dict
 
 class User(UserMixin):
 
-    def __init__(self, email, **kwargs):
-        sql = "select id, email,username, password, phone, avatar, confirmed, locked, active, role_id from user where email=:email"
-        params = {"email": email}
+    def __init__(self, username, **kwargs):
+        sql = "select id, email,username, password, phone, avatar, confirmed, locked, active, role_id from user where username=:username"
+        params = {"username": username}
         data = fetch_to_dict(sql=sql, params=params, fecth="one")
         self.id = data['id']
         self.email = data['email']
@@ -50,3 +50,14 @@ class User(UserMixin):
     @property
     def gravatar(self):
         return 'https://gravatar.com/avatar/%s?d=monsterid' % self.email_hash
+
+    @staticmethod
+    def create(email, username, password):
+        password_hash = generate_password_hash(password)
+        params = {
+            "email": email,
+            "username": username,
+            "password_hash": password_hash
+        }
+        sql = "insert into user (email, username, password) values (:email, :username, :password_hash)"
+        execute(sql, params)

@@ -34,8 +34,8 @@ redis_client = FlaskRedis()
 
 @login_manager.user_loader
 def load_user(user_id):
-    from bluelog.models import Admin
-    user = Admin.query.get(int(user_id))
+    from newsdph.models import User
+    user = User(user_id)
     return user
 
 
