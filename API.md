@@ -18,9 +18,11 @@ POST
     "msg":"铁憨憨!登录成功",
     "payload":{
         "id": 1,
+        "confirmed": 1,
+        "locked" :1,
+        "active": 1,
         "token":"eyasdasd.asdasdasd.asdasd",
         "status":1
-
     }
 }
 ```
@@ -67,8 +69,7 @@ POST
     "email":"qqqq@qq.com",
     "username":"xxxxx",
     "password":"xxxxx",
-    "name":"李老大",
-    "sms": "123456"
+    "code": "123456"
 }
 ```
 

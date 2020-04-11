@@ -17,7 +17,7 @@ from newsdph.blueprints.auth import auth_bp
 
 
 # from bluelog.extensions import bootstrap, db, login_manager, csrf, ckeditor, mail, moment, toolbar, migrate
-from newsdph.extensions import db, login_manager, csrf, ckeditor, mail, moment, toolbar, dropzone, whooshee, avatars, socketio, oauth, cors, redis_client
+from newsdph.extensions import db, login_manager, csrf, ckeditor, mail, moment, toolbar, dropzone, whooshee, avatars, socketio, oauth, cors, redis_client, ma
 # from bluelog.models import Admin, Post, Category, Comment, Link
 from newsdph.settings import config, CeleryConfig
 
@@ -89,10 +89,11 @@ def register_extensions(app):
     dropzone.init_app(app)
     whooshee.init_app(app)
     avatars.init_app(app)
-    socketio.init_app(app)
+    # socketio.init_app(app)
     oauth.init_app(app)
     cors.init_app(app)
     redis_client.init_app(app)
+    ma.init_app(app)
     # migrate.init_app(app, db)
 
 

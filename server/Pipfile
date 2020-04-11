@@ -30,6 +30,9 @@ flask-cors = "*"
 pymysql = "*"
 gunicorn = "*"
 flask-redis = "*"
+marshmallow = "*"
+flask-marshmallow = "*"
+marshmallow-sqlalchemy = "*"
 
 [requires]
 python_version = "3.6"

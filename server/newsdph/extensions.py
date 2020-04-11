@@ -15,6 +15,7 @@ from flask_socketio import SocketIO
 from authlib.integrations.flask_client import OAuth
 from flask_cors import CORS
 from flask_redis import FlaskRedis
+from flask_marshmallow import Marshmallow
 
 db = SQLAlchemy()
 login_manager = LoginManager()
@@ -31,6 +32,7 @@ socketio = SocketIO()
 oauth = OAuth()
 cors = CORS()
 redis_client = FlaskRedis()
+ma = Marshmallow()
 
 @login_manager.user_loader
 def load_user(user_id):

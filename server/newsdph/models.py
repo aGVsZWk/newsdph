@@ -11,29 +11,42 @@ from newsdph.utils.db import execute, fetch_to_dict
 
 class User(UserMixin):
 
-    def __init__(self, username, **kwargs):
-        sql = "select id, email,username, password, phone, avatar, confirmed, locked, active, role_id from user where username=:username"
-        params = {"username": username}
+    @classmethod
+    def get_user_message_by_id(cls, id, *args, **kwargs):
+        sql = "select id, name, sex, hobby, age, birthday, email, address, "
+        "phone, avatar, role_id, locked from user where id=:id"
+        params = {"id": id}
         data = fetch_to_dict(sql=sql, params=params, fecth="one")
-        self.id = data['id']
-        self.email = data['email']
-        self.username = data['username']
-        self.password_hash = data['password']
-        self.phone = data['phone']
-        self.avatar = data['avatar']
-        self.confirmed = data['confirmed']
-        self.locked = data['locked']
-        self.active = data['active']
-        self.role_id = data['role_id']
-        self.data= data
-        super(User, self).__init__(**kwargs)
-        # self.generate_email_hash()
+        cls.exist = True if data else False
+        cls.id = data['id']
+        cls.name = data['name']
+        cls.sex = data['sex']
+        cls.hobby = data['hobby']
+        cls.age = data['age']
+        cls.birthday = data['birthday']
+        cls.email = data['email']
+        cls.address = data['address']
+        cls.phone = data['phone']
+        cls.avatar = data['avatar']
+        cls.locked = data['locked']
+        cls.role_id = data['role_id']
+        return super().__new__(cls, *args, **kwargs)
 
+    @classmethod
+    def query_user(
+        cls, name, sex, age, age_gt, age_lt, age_gte, age_lte, birday,
+        birday_gt, birday_lt, birday_gte, birday_lte, email, username, address,
+        phone, register_time_gt, register_time_lt, register_time_gte,
+        register_time_lte, login_time_gt, login_time_lt, login_time_gte,
+        login_time_lte, confirmed, locked, active, role, order, desc
+    ):
+
+        pass
 
     def set_password(self, password):
         self.password_hash = generate_password_hash(password)
         sql = "update user set password = :password where id= :id"
-        params = {"password":self.password_hash, "id":self.id}
+        params = {"password": self.password_hash, "id": self.id}
         execute(sql, params)
 
     def validate_password(self, password):
@@ -42,6 +55,19 @@ class User(UserMixin):
     def generate_email_hash(self):
         if self.email is not None and self.email_hash is None:
             self.email_hash = hashlib.md5(self.email.encode('utf-8')).hexdigest()  # encode for py23 compatible
+
+    @classmethod
+    def get_user_by_username(cls, username, *args, **kwargs):
+        sql = "select id, confirmed, password, locked, active from user where username=:username"
+        params = {"username": username}
+        data = fetch_to_dict(sql=sql, params=params, fecth="one")
+        cls.exist = True if data else False
+        cls.id = data.get("id")
+        cls.confirmed = data.get('confirmed')
+        cls.locked = data.get('locked')
+        cls.active = data.get('active')
+        cls.password_hash = data.get('password')
+        return super().__new__(cls, *args, **kwargs)
 
     @property
     def is_admin(self):
