@@ -33,14 +33,25 @@ class User(UserMixin):
         return super().__new__(cls, *args, **kwargs)
 
     @classmethod
-    def query_user(
-        cls, name, sex, age, age_gt, age_lt, age_gte, age_lte, birday,
-        birday_gt, birday_lt, birday_gte, birday_lte, email, username, address,
-        phone, register_time_gt, register_time_lt, register_time_gte,
-        register_time_lte, login_time_gt, login_time_lt, login_time_gte,
-        login_time_lte, confirmed, locked, active, role, order, desc
-    ):
+    def query_user(cls, **kwargs):
+        basesql = 'select id, name, sex, age, birthday, email, username,'
+            ' address, phone, register_time, login_time, confirmed, locked,'
+            ' active, role_id from user where id > 0 '
+        condition = ''
+        if kwargs.get('name'):
+            condition += 'and name = :name'
+        if kwargs.get('sex'):
+            condition += 'and sex = :sex'
+        
 
+        # name, sex, age, age_gt, age_lt, age_gte, age_lte, birday,
+        # birday_gt, birday_lt, birday_gte, birday_lte, email, username, address,
+        # phone, register_time_gt, register_time_lt, register_time_gte,
+        # register_time_lte, login_time_gt, login_time_lt, login_time_gte,
+        # login_time_lte, confirmed, locked, active, role, order, desc
+        #
+        #
+        #
         pass
 
     def set_password(self, password):
