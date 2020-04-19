@@ -41,20 +41,30 @@ GET
 
 ```json
 {
-    "code": 200,
-    "msg": "铁憨憨!获取用户信息成功",
-    "payload":{
-        "data": [
-            {
-                "id": 1,
-                "avatar": "avatar1",
-                "confirmed": 1,
-                "active": 1,
-                "locked": 0,
-            }
-        ],
-        "status": 1
-    }
+  "code": 200,
+  "msg": "铁憨憨!获取用户信息成功!!!",
+  "payload": {
+    "count": 1,
+    "data": [
+      {
+        "active": 1,
+        "age": 18,
+        "avatar": "",
+        "birthday": "Wed, 08 Apr 2020 17:38:48 GMT",
+        "confirmed": 1,
+        "email": "2571117816@qq.com",
+        "hobby": "足球,睡觉",
+        "id": 1,
+        "locked": 0,
+        "name": "何磊",
+        "phone": "13838381234",
+        "role_id": 4,
+        "sex": "man",
+        "username": "aGVsZWk"
+      }
+    ],
+    "status": 1
+  }
 }
 ```
 

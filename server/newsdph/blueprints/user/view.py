@@ -58,7 +58,7 @@ def query_profile(args):
 
     page = args.get('page')
     size = args.get("page_size")
-    sql = "select id, sex, hobby, age, birthday, email, username, phone, avatar, confirmed, locked, active, role_id from user" + condition
+    sql = "select id, name, sex, hobby, age, birthday, email, username, phone, avatar, confirmed, locked, active, role_id from user" + condition
     if page and size:
         data = fetch_to_dict_pagetion(sql=sql, params=params, page=page, page_size=size)
     else:
