@@ -1,17 +1,17 @@
 from newsdph.extensions import db
 
 
-def fetch_to_dict(sql, params={}, fecth='all', bind=None):
+def fetch_to_dict(sql, params={}, fetch='all', bind=None):
     '''
     dict的方式返回数据
     :param sql: select * from xxx where name=:name
     :param params:{'name':'zhangsan'}
-    :param fecth:默认返回全部数据，返回格式为[{},{}],如果fecth='one',返回单条数据，格式为dict
+    :param fetch:默认返回全部数据，返回格式为[{},{}],如果fetch='one',返回单条数据，格式为dict
     :param bind:连接的数据，默认取配置的SQLALCHEMY_DATABASE_URL，
     :return:
     '''
     resultProxy = db.session.execute(sql, params, bind=db.get_engine(bind=bind))
-    if fecth == 'one':
+    if fetch == 'one':
         result_tuple = resultProxy.fetchone()
         if result_tuple:
             result = dict(zip(resultProxy.keys(), list(result_tuple)))
@@ -26,7 +26,7 @@ def fetch_to_dict(sql, params={}, fecth='all', bind=None):
                 result_row = dict(zip(keys, row))
                 result.append(result_row)
         else:
-            return {}
+            return []
     return result
 
 
@@ -37,7 +37,7 @@ def fetch_to_dict_pagetion(sql, params={}, page=1, page_size=15, bind=None):
     sql_page = '%s limit %s,%s' % (sql, (page - 1) * page_size, page_size)
     print('sql_page:', sql_page)
     result = fetch_to_dict(sql_page, params, 'all', bind=bind)
-    result_dict = {'results': result, 'count': total_count}
+    result_dict = {'data': result, 'count': total_count}
     return result_dict
 
 
@@ -49,7 +49,7 @@ def execute(sql, params={}, bind=None):
 
 
 def get_count(sql, params={}, bind=None):
-    return int(fetch_to_dict(sql, params, fecth='one', bind=bind).get('count'))
+    return int(fetch_to_dict(sql, params, fetch='one', bind=bind).get('count'))
 
 # 执行多条语句，失败自动回滚
 

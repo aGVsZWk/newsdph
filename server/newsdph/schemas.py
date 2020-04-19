@@ -16,6 +16,7 @@ class AuthVerifySchema(Schema):
     email = fields.Email(load_only=True)
 
 class AuthRegisterSchema(Schema):
+    name = fields.Str(load_only=True)
     email = fields.Email(load_only=True)
     username = fields.Str(load_only=True)
     password = fields.Str(load_only=True)

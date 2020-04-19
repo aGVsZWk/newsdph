@@ -40,11 +40,6 @@ def resize_image(image, filename, base_width):
 
 
 def compress_file_list(input_file_list, out_file_path):
-    """
-    :param input_file_list:
-    :param out_file_path:
-    :return:
-    """
     with tarfile.open(out_file_path, "w:") as tar:
         for file_path in input_file_list:
             tar.add(file_path, arcname=os.path.basename(file_path))
@@ -54,7 +49,6 @@ def uzip_zip_file(zip_file_path, file_dir):
     with zipfile.ZipFile(zip_file_path, "r") as z:
         for f in z.namelist():
             z.extract(f, file_dir)
-
 
 
 def download_with_url(url, file_path):

@@ -16,7 +16,7 @@ class User(UserMixin):
         sql = "select id, name, sex, hobby, age, birthday, email, address, "
         "phone, avatar, role_id, locked from user where id=:id"
         params = {"id": id}
-        data = fetch_to_dict(sql=sql, params=params, fecth="one")
+        data = fetch_to_dict(sql=sql, params=params, fetch="one")
         cls.exist = True if data else False
         cls.id = data['id']
         cls.name = data['name']
@@ -34,15 +34,15 @@ class User(UserMixin):
 
     @classmethod
     def query_user(cls, **kwargs):
-        basesql = 'select id, name, sex, age, birthday, email, username,'
-            ' address, phone, register_time, login_time, confirmed, locked,'
+        basesql = 'select id, name, sex, age, birthday, email, username,' + \
+            ' address, phone, register_time, login_time, confirmed, locked,' + \
             ' active, role_id from user where id > 0 '
         condition = ''
         if kwargs.get('name'):
             condition += 'and name = :name'
         if kwargs.get('sex'):
             condition += 'and sex = :sex'
-        
+
 
         # name, sex, age, age_gt, age_lt, age_gte, age_lte, birday,
         # birday_gt, birday_lt, birday_gte, birday_lte, email, username, address,
@@ -71,7 +71,7 @@ class User(UserMixin):
     def get_user_by_username(cls, username, *args, **kwargs):
         sql = "select id, confirmed, password, locked, active from user where username=:username"
         params = {"username": username}
-        data = fetch_to_dict(sql=sql, params=params, fecth="one")
+        data = fetch_to_dict(sql=sql, params=params, fetch="one")
         cls.exist = True if data else False
         cls.id = data.get("id")
         cls.confirmed = data.get('confirmed')
