@@ -1,13 +1,13 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import './index.css';
-// import App from './App';
-import ControlPanel from "./ControlPanel";
+import Routes from './Routes';
 import * as serviceWorker from './serviceWorker';
+import 'antd/dist/antd.css';
+
 
 ReactDOM.render(
   <React.StrictMode>
-    <ControlPanel />
+    <Routes />
   </React.StrictMode>,
   document.getElementById('root')
 );
