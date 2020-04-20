@@ -90,35 +90,40 @@ const columns = [
 	}
 ]
 
-// <Anchor className='toc-affix'>
-// 	<Anchor.Link href='#basic' title='基础表格'/>
-// 	<Anchor.Link href='#JSX' title='JSX表格'/>
-// 	<Anchor.Link href='#checked' title='可选表格'/>
-// 	<Anchor.Link href='#sort' title='可筛选排序表格'/>
-// </Anchor>
-
-// <div>
-// 	<h3>何时使用</h3>
-// 	<Divider/>
-// 	<p>当有大量结构化的数据需要展现时；</p>
-// 	<p>当需要对数据进行排序、搜索、分页、自定义操作等复杂行为时。</p>
-// </div>
-// <span style={{
-// 		marginRight: 20
-// 	}}>生日</span>
-// <DatePicker placeholder="请选择出生日期" style={{
-// 		width: 200
-// 	}}/>
-// <span style={{
-// 		marginLeft: 10,
-// 		marginRight: 10
-// 	}}>性别</span>
-
-// <span style={{marginLeft: 10, marginRight: 10}}>姓名</span>
 class Home extends React.Component {
-	state = {
-		data: []
+	constructor(props) {
+        super(props);
+        // 定义初始化状态
+        this.state = {
+  			formData: {},
+			tableData: []
+        }
+    }
+
+	onFinish = (fieldsValues) => {
+		const birthRangeValue = fieldsValues['birth']
+		const name = fieldsValues['name']
+		const sex = fieldsValues['sex']
+		const email = fieldsValues['email']
+		const age_lte = fieldsValues['age_lte']
+		const age_gte = fieldsValues['age_gte']
+		const formData = {
+			'start_birth': birthRangeValue[0].format('YYYY-MM-DD'),
+			'end_birth': birthRangeValue[1].format('YYYY-MM-DD'),
+			'name': name,
+			'sex': sex,
+			'email': email,
+			'age_lte': age_lte,
+			'age_gte': age_gte
+
+		}
+		this.setState({
+			formData: formData
+		});
+		console.log(this.state.formData);
 	}
+
+
 	render() {
 		const formItemLayout = {
 			labelCol: {
@@ -191,7 +196,7 @@ class Home extends React.Component {
 							minHeight: 280
 						}}>
 
-						<Form {...formItemLayout} layout="inline">
+						<Form {...formItemLayout} layout="inline" onFinish={this.onFinish}>
 							<Row gutter={24}>
 								<Col span={8}>
 									<Form.Item label="姓名" name="name">
@@ -211,30 +216,45 @@ class Home extends React.Component {
 									</Form.Item>
 								</Col>
 								<Col span={8}>
-									<Form.Item label="生日">
-										<DatePicker placeholder="请选择出生日期" style={{
+									<Form.Item label="生日" name="birth">
+										<DatePicker.RangePicker style={{
 												width: 200
-											}}/></Form.Item>
+											}} rules={[{type: ""}]} />
+									</Form.Item>
 								</Col>
 								<Col span={8}>
-									<Form.Item label="年龄" style={{ marginBottom: 0 }}>
+									<Form.Item label="年龄" style={{
+											marginBottom: 0
+										}}>
 										<Row>
-											<Col span={8}><Form.Item style={{ display: 'inline-block'}}><InputNumber placeholder="起始年龄"/></Form.Item>
+											<Col span={8}>
+												<Form.Item style={{
+														display: 'inline-block'
+													}} name="age_gte"><InputNumber placeholder="起始年龄"/></Form.Item>
 											</Col>
-											<Col span={8}><span style={{ display: 'inline-block',lineHeight: '32px', textAlign: 'center'}}>-</span></Col>
-											<Col span={8}><Form.Item style={{ display: 'inline-block'}}><InputNumber placeholder="结束年龄"/></Form.Item>
+											<Col span={8}>
+												<span style={{
+														display: 'inline-block',
+														lineHeight: '32px',
+														textAlign: 'center'
+													}}>-</span>
+											</Col>
+											<Col span={8}>
+												<Form.Item style={{
+														display: 'inline-block'
+													}} name="age_lte"><InputNumber placeholder="结束年龄" /></Form.Item>
 											</Col>
 										</Row>
 									</Form.Item>
 								</Col>
 								<Col span={8}>
 									<Form.Item label="邮箱" name="email">
-										<DatePicker></DatePicker>
+										<Input placeholder="请输入邮箱"/>
 									</Form.Item>
 								</Col>
 								<Col span={8}>
 									<Form.Item label="手机" name="phone">
-										<DatePicker></DatePicker>
+										<Input placeholder="请输入手机号"/>
 									</Form.Item>
 								</Col>
 
