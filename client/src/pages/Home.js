@@ -19,7 +19,7 @@ import {
 	InputNumber
 } from 'antd'
 import {UserOutlined, LaptopOutlined, NotificationOutlined} from '@ant-design/icons';
-
+import api from '../api'
 // import '@/style/view-style/table.scss'
 
 const columns = [
@@ -115,12 +115,21 @@ class Home extends React.Component {
 			'email': email,
 			'age_lte': age_lte,
 			'age_gte': age_gte
-
 		}
 		this.setState({
 			formData: formData
 		});
 		console.log(this.state.formData);
+		api.user.getUserInfo(this.state.formData)
+		.then((res) =>{
+			console.log(res);
+			if (res.state === 0) {
+				console.log("成功");
+			}
+		})
+		.catch((err) =>{
+			console.log(err);
+		})
 	}
 
 
