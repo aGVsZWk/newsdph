@@ -1,7 +1,7 @@
 const {override, addDecoratorsLegacy, fixBabelImports, addWebpackAlias, addLessLoader} = require("customize-cra");
 const path = require('path');
 
-process.env.GENERATE_SOURCEMAP = "false";
+const modifyVars = require('./theme/nx.js')
 
 module.exports = override(
 	// enable legacy decorators babel plugin
@@ -19,8 +19,6 @@ module.exports = override(
 
 	addLessLoader({
 		javascriptEnabled: true,
-		modifyVars: {
-			'@primary-color': '#1DA57A'
-		}
+		modifyVars
 	})
 );
