@@ -13,13 +13,19 @@ const commonRoutes = [
 const privateRoutes = [
 	{
 		pathname: '/admin/dashboard',
-		component: Dashboard
+		component: Dashboard,
+    title: '仪表盘',
+		isTop: true
 	}, {
 		pathname: '/admin/article',
-		component: Article
+		component: Article,
+    title: '文章管理',
+		isTop: true
 	}, {
 		pathname: '/admin/setting',
-		component: Setting
+		component: Setting,
+    title: '系统设置',
+		isTop: true
 	}
 ]
 

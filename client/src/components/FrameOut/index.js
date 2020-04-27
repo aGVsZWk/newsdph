@@ -1,15 +1,28 @@
 import React, {Component} from 'react';
 import {Layout, Menu, Breadcrumb} from 'antd';
 import {UserOutlined, LaptopOutlined, NotificationOutlined, SettingFilled} from '@ant-design/icons';
+import {withRouter} from 'react-router-dom';
+import {privateRoutes} from '@/routers';
 
 const {SubMenu} = Menu;
 const {Header, Content, Sider} = Layout;
 
+
+// 左侧菜单只显示一级
+const topMenus = privateRoutes.filter((item) => {
+	return item.isTop === true
+})
+
 // 布局组件，公共的页面部分
+@withRouter
 class FrameOut extends Component {
 	constructor(props) {
 		super(props);
 		this.state = {}
+	}
+
+	handMenuClick = ({ item, key, keyPath, domEvent }) => {
+		this.props.history.push(key)
 	}
 
 	render() {
@@ -23,14 +36,19 @@ class FrameOut extends Component {
 					<Sider width={200} className="site-layout-background">
 						<Menu
 							mode="inline"
-							defaultSelectedKeys={['1']}
+							defaultSelectedKeys={topMenus[0].pathname}
 							defaultOpenKeys={['sub1']}
 							style={{
 								height: '100%',
 								borderRight: 0
 							}}>
-							<Menu.Item key="1"><SettingFilled />系统设置</Menu.Item>
-							<Menu.Item key="2"><LaptopOutlined />文章管理</Menu.Item>
+						{
+							topMenus.map((item) => {
+								return (
+									<Menu.Item key={item.pathname} onClick={this.handMenuClick}>{item.title}</Menu.Item >
+								)
+							})
+						}
 						</Menu>
 					</Sider>
 					{/* 不成文的规范：padding margin 建议是 8 的倍数*/}
@@ -45,7 +63,7 @@ class FrameOut extends Component {
 								margin: 0,
 								minHeight: 280,
 							}}>
-							Content
+							{this.props.children}
 						</Content>
 					</Layout>
 				</Layout>
