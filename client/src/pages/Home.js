@@ -19,7 +19,7 @@ import {
 	InputNumber
 } from 'antd'
 import {UserOutlined, LaptopOutlined, NotificationOutlined} from '@ant-design/icons';
-import api from '../api'
+import api from '@/api'
 // import '@/style/view-style/table.scss'
 
 const columns = [

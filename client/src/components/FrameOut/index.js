@@ -7,7 +7,6 @@ import {privateRoutes} from '@/routers';
 const {SubMenu} = Menu;
 const {Header, Content, Sider} = Layout;
 
-
 // 左侧菜单只显示一级
 const topMenus = privateRoutes.filter((item) => {
 	return item.isTop === true
@@ -21,9 +20,12 @@ class FrameOut extends Component {
 		this.state = {}
 	}
 
-	handMenuClick = ({ item, key, keyPath, domEvent }) => {
+	handleMenuClick = ({ item, key, keyPath, domEvent }) => {
 		this.props.history.push(key)
 	}
+
+
+
 
 	render() {
 		return (
@@ -45,7 +47,7 @@ class FrameOut extends Component {
 						{
 							topMenus.map((item) => {
 								return (
-									<Menu.Item key={item.pathname} onClick={this.handMenuClick}>{item.title}</Menu.Item >
+									<Menu.Item key={item.pathname} onClick={this.handleMenuClick}>{item.title}</Menu.Item >
 								)
 							})
 						}
