@@ -13,6 +13,8 @@ const topMenus = privateRoutes.filter((item) => {
 })
 
 // 布局组件，公共的页面部分
+/*高阶组件中的withRouter, 作用是将一个组件包裹进Route里面, 然后react-router的三个对象history, location, match就会被放进这个组件的props属性中. */
+
 @withRouter
 class FrameOut extends Component {
 	constructor(props) {
@@ -23,9 +25,6 @@ class FrameOut extends Component {
 	handleMenuClick = ({ item, key, keyPath, domEvent }) => {
 		this.props.history.push(key)
 	}
-
-
-
 
 	render() {
 		return (

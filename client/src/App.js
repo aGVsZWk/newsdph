@@ -6,6 +6,22 @@ import {Route, Switch, Redirect} from 'react-router-dom';
 import FrameOut from '@/components/FrameOut'
 
 class App extends Component {
+
+  constructor(props) {
+		super(props);
+		// console.log('app', this.props);
+		// 只要地址栏的hash变化，listen就会被触发，参数locationd代表当前url地址
+		this.props.history.listen( (location) => {
+			console.log("location", location);
+			var pathname = location.pathname;
+			var findOne = privateRoutes.find((item) => {
+				return item.pathname === pathname
+			})
+			console.log("findOne", findOne);
+			window.document.title = findOne && findOne.title;
+		})
+	}
+
 	render() {
 		// 显示私有的路由  /admin/dashboard 二级路由 (rbac授权)
 		return (

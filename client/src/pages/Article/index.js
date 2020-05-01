@@ -2,6 +2,8 @@ import React, {Component} from 'react';
 import {Card, Button, Modal} from 'antd';
 import api from '@/api'
 
+import {withRouter} from 'react-router-dom'
+
 class Article extends Component {
 	constructor(props) {
 		super(props);
@@ -9,10 +11,14 @@ class Article extends Component {
 	}
 
 	componentWillMount() {
+		this.setState({isLoading: true});
+		// Promise 存在 1：then 2：catch 3：finally
 		api.article.getArticles().then((value) => {
 			console.log(value)
 		}).catch((err) => {
 			console.log(err)
+		}).finally(() => {
+			this.setState({isLoading: false});
 		})
 	}
 
@@ -26,6 +32,7 @@ class Article extends Component {
 		})
 	}
 	goHandler = (record) => {
+		// push, goBack, listen
 		this.props.history.push('/admin/dashboard/')
 	}
 	backHandler = (record) => {
