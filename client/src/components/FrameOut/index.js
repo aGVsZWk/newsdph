@@ -1,6 +1,15 @@
 import React, {Component} from 'react';
-import {Layout, Menu, Breadcrumb} from 'antd';
-import {UserOutlined, LaptopOutlined, NotificationOutlined, SettingFilled} from '@ant-design/icons';
+import {
+	Layout,
+	Menu,
+	Breadcrumb,
+	Row,
+	Col,
+	Dropdown,
+	Avatar,
+	Badge
+} from 'antd';
+import {UserOutlined, LaptopOutlined, NotificationOutlined, SettingFilled, DownOutlined} from '@ant-design/icons';
 import {withRouter} from 'react-router-dom';
 import {privateRoutes} from '@/routers';
 
@@ -22,16 +31,61 @@ class FrameOut extends Component {
 		this.state = {}
 	}
 
-	handleMenuClick = ({ item, key, keyPath, domEvent }) => {
+	handleMenuClick = ({item, key, keyPath, domEvent}) => {
 		this.props.history.push(key)
 	}
+	menu = () => (
+		<Menu onClick={this.handleMenuClick}>
+			<Menu.Item key="/admin/notify">
+				<div>
+					<Badge dot>通知中心</Badge>
+				</div>
+			</Menu.Item>
+			<Menu.Item key="/admin/setting">
+				<div>
+					個人設置
+				</div>
+			</Menu.Item>
+			<Menu.Item key="/login">
+				<div>
+					退出
+				</div>
+			</Menu.Item>
+		</Menu>
+	)
 
 	render() {
 		return (
-			<Layout style={{minHeight: '100%'}}>
-				<Header className="header">
-					<div className="logo"/>
-					<h2 style={{color: "#fff"}}>CMS 管理系统</h2>
+			<Layout style={{
+					minHeight: '100%'
+				}}>
+				<Header>
+					<Row>
+						<Col span={8}>
+							<h2 style={{
+									color: "#fff"
+								}}>CMS 管理系统</h2>
+						</Col>
+						<Col span={3} offset={13}>
+							<div style={{
+									color: "#fff"
+								}}>
+								<Dropdown overlay={this.menu}>
+									<Badge count={25}>
+										<div style={{
+												color: "#fff"
+											}}>
+											<Avatar src="https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png"/>
+											欢迎您 xxx !
+											<DownOutlined/>
+										</div>
+									</Badge>
+								</Dropdown>
+							</div>
+
+						</Col>
+					</Row>
+
 				</Header>
 				<Layout>
 					<Sider width={200} className="site-layout-background">
@@ -43,13 +97,11 @@ class FrameOut extends Component {
 								height: '100%',
 								borderRight: 0
 							}}>
-						{
-							topMenus.map((item) => {
-								return (
-									<Menu.Item key={item.pathname} onClick={this.handleMenuClick}>{item.title}</Menu.Item >
-								)
-							})
-						}
+							{
+								topMenus.map((item) => {
+									return (<Menu.Item key={item.pathname} onClick={this.handleMenuClick}>{item.title}</Menu.Item >)
+								})
+							}
 						</Menu>
 					</Sider>
 					{/* 不成文的规范：padding margin 建议是 8 的倍数*/}

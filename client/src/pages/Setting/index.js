@@ -4,13 +4,13 @@ class Setting extends Component {
 	constructor(props) {
 		super(props);
 		this.state = {}
-}
-		render() {
-			return (<div>
-				<h2>Setting页面</h2>
-			</div>);
-		}
-
+	}
+	render() {
+		return (<div>
+			<h2>Setting页面</h2>
+		</div>);
 	}
 
-	export default Setting;
+}
+
+export default Setting;
