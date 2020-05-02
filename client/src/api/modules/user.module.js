@@ -1,8 +1,7 @@
-import CommonHttp from '../http'
+import CommonHttp from "../http";
 
-const commonHttp = new CommonHttp()
-const http = commonHttp.http.bind(commonHttp)
-
+const commonHttp = new CommonHttp();
+const http = commonHttp.http.bind(commonHttp);
 
 
 /**
@@ -10,11 +9,11 @@ const http = commonHttp.http.bind(commonHttp)
  * @param params
  */
 const getUserInfo = params => http({
-    url: 'http://127.0.0.1:8000/user/profile',
-    params,
-})
+  url: "http://127.0.0.1:8000/user/profile",
+  params,
+});
 
 
 export default {
-    getUserInfo,
-}
+  getUserInfo,
+};
