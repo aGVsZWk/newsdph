@@ -1,7 +1,6 @@
 import {Tabs, Form} from "antd";
 import React, {useState} from "react";
 import useMergeValue from "use-merge-value";
-import classNames from "classnames";
 import LoginContext from "./LoginContext";
 import LoginItem from "./LoginItem";
 import LoginSubmit from "./LoginSubmit";
@@ -51,7 +50,7 @@ const LoginForm = props => {
         },
       }}
     >
-      <div className={classNames(className, styles.login)}>
+      <div className={[className, styles.login].join(" ")}>
         <Form
           form={props.form}
           onFinish={values => {

@@ -20,7 +20,7 @@ export default {
     rules: [
       {
         required: true,
-        message: "Please enter username!",
+        message: "瓜娃子！请输入用户名！！！",
       },
     ],
   },
@@ -35,7 +35,7 @@ export default {
     rules: [
       {
         required: true,
-        message: "Please enter password!",
+        message: "瓜娃子！请输入密码！！！",
       },
     ],
   },
@@ -48,11 +48,11 @@ export default {
     rules: [
       {
         required: true,
-        message: "Please enter mobile number!",
+        message: "瓜娃子！请输入手机号！！！",
       },
       {
         pattern: /^1\d{10}$/,
-        message: "Wrong mobile number format!",
+        message: "手机号格式错误!",
       },
     ],
   },
@@ -65,7 +65,7 @@ export default {
     rules: [
       {
         required: true,
-        message: "Please enter Captcha!",
+        message: "瓜娃子，请输入验证码！！！",
       },
     ],
   },
