@@ -28,6 +28,22 @@ const Notify = Loadable({
   loading: Loading,
 });
 
+<<<<<<< HEAD
+const FileExport = Loadable({
+  loader: () => import('./FileExport'),
+	loading: Loading
+});
+
+export {
+	Article,
+	Dashboard,
+	Login,
+	NotFound,
+	Setting,
+  Notify,
+  FileExport
+}
+=======
 
 export {
   Article,
@@ -37,3 +53,4 @@ export {
   Setting,
   Notify,
 };
+>>>>>>> 6f81ee6da93bc83205f3b3c02dd4129200ade967
