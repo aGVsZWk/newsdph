@@ -28,7 +28,10 @@ const Notify = Loadable({
 	loading: Loading
 });
 
-
+const FileExport = Loadable({
+  loader: () => import('./FileExport'),
+	loading: Loading
+});
 
 export {
 	Article,
@@ -36,5 +39,6 @@ export {
 	Login,
 	NotFound,
 	Setting,
-  Notify
+  Notify,
+  FileExport
 }

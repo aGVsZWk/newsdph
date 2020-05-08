@@ -1,4 +1,4 @@
-import {Article, Dashboard, Login, NotFound, Setting, Notify} from '@/pages'
+import {Article, Dashboard, Login, NotFound, Setting, Notify, FileExport} from '@/pages'
 
 const commonRoutes = [
 	{
@@ -31,7 +31,12 @@ const privateRoutes = [
 		component: Notify,
     title: '通知中心',
 		isTop: false
-	}
+	}, {
+		pathname: '/admin/file-export',
+		component: FileExport,
+    title: '文件导出',
+		isTop: false
+	},
 ]
 
 export {
