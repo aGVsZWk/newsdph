@@ -1,30 +1,29 @@
-import { Tabs, Form } from 'antd';
-import React, { useState } from 'react';
-import useMergeValue from 'use-merge-value';
-import classNames from 'classnames';
-import LoginContext from './LoginContext';
-import LoginItem from './LoginItem';
-import LoginSubmit from './LoginSubmit';
-import LoginTab from './LoginTab';
-import styles from './index.less';
+import {Tabs, Form} from "antd";
+import React, {useState} from "react";
+import useMergeValue from "use-merge-value";
+import LoginContext from "./LoginContext";
+import LoginItem from "./LoginItem";
+import LoginSubmit from "./LoginSubmit";
+import LoginTab from "./LoginTab";
+import styles from "./index.less";
 
 const LoginForm = props => {
-  const { className } = props;
+  const {className} = props;
   const [tabs, setTabs] = useState([]);
   const [active, setActive] = useState();
   const TabChildren = [];
   const otherChildren = [];
-  const [type, setType] = useMergeValue('', {
+  const [type, setType] = useMergeValue("", {
     value: props.activeKey,
     onChange: props.onTabChange,
   });
-
+  
   React.Children.forEach(props.children, child => {
     if (!child) {
       return;
     }
-
-    if (child.type.typeName === 'LoginTab') {
+    
+    if (child.type.typeName === "LoginTab") {
       TabChildren.push(child);
     } else {
       otherChildren.push(child);
@@ -51,7 +50,7 @@ const LoginForm = props => {
         },
       }}
     >
-      <div className={classNames(className, styles.login)}>
+      <div className={[className, styles.login].join(" ")}>
         <Form
           form={props.form}
           onFinish={values => {
