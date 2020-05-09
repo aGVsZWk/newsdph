@@ -1,5 +1,6 @@
 import os
 import sys
+from sqlalchemy import create_engine
 
 basedir = os.path.abspath(os.path.dirname(os.path.dirname(__file__)))
 
@@ -118,7 +119,11 @@ class BaseConfig(object):
 
 class DevelopmentConfig(BaseConfig):
     # SQLALCHEMY_DATABASE_URI = prefix + os.path.join(basedir, 'data-dev.db')
-    SQLALCHEMY_DATABASE_URI = os.getenv("SQLALCHEMY_DATABASE_URI")
+    SQLALCHEMY_DATABASE_URI = os.getenv("MYSQL_URL")
+    SQLALCHEMY_BINDS = {
+        'chat': os.getenv('SQLITE_URL'),
+        'live': os.getenv("POSTGRES_URL")
+    }
     # session配置
     # SESSION_TYPE = "redis"
     # SESSION_REDIS = redis.StrictRedis(host=REIDS_HOST,port=REDIS_PORT)
@@ -130,7 +135,6 @@ class DevelopmentConfig(BaseConfig):
 class TestingConfig(BaseConfig):
     TESTING = True
     WTF_CSRF_ENABLED = False
-    SQLALCHEMY_DATABASE_URI = 'sqlite:///:memory:'  # in-memory database
 
 
 class ProductionConfig(BaseConfig):

@@ -1,0 +1,38 @@
+[[source]]
+name = "pypi"
+url = "https://pypi.org/simple"
+verify_ssl = true
+
+[dev-packages]
+watchdog = "*"
+
+[packages]
+itchat = "*"
+python-dotenv = "*"
+flask = "==1.0"
+flake8 = "*"
+celery = {extras = ["redis"],version = "*"}
+flask-ckeditor = "*"
+flask-sqlalchemy = "*"
+flask-wtf = "*"
+flask-debugtoolbar = "*"
+flask-dropzone = "*"
+flask-login = "*"
+flask-mail = "*"
+flask-moment = "*"
+flask-whooshee = "*"
+lock = "*"
+flask-socketio = "*"
+flask-avatars = "*"
+werkzeug = "*"
+authlib = "*"
+flask-cors = "*"
+pymysql = "*"
+gunicorn = "*"
+flask-redis = "*"
+marshmallow = "*"
+flask-marshmallow = "*"
+marshmallow-sqlalchemy = "*"
+
+[requires]
+python_version = "3.6"

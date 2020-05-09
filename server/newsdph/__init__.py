@@ -6,20 +6,12 @@ from celery import Celery
 
 import click
 from flask import Flask, render_template, request
-# from flask_login import current_user
+
 # from flask_sqlalchemy import get_debug_queries
-# from flask_wtf.csrf import CSRFError
-
-# from newsdph.blueprints.admin import admin_bp
-from newsdph.blueprints.auth import auth_bp
-from newsdph.blueprints.user.view import user_bp
-# from newsdph.blueprints.main import main_bp
-
-
-# from bluelog.extensions import bootstrap, db, login_manager, csrf, ckeditor, mail, moment, toolbar, migrate
-from newsdph.extensions import db, login_manager, csrf, ckeditor, mail, moment, toolbar, dropzone, whooshee, avatars, socketio, oauth, cors, redis_client
 # from bluelog.models import Admin, Post, Category, Comment, Link
 from newsdph.settings import config, CeleryConfig
+from newsdph.extensions import register_extensions
+from newsdph.blueprints import register_blueprints
 
 basedir = os.path.abspath(os.path.dirname(os.path.dirname(__file__)))
 
@@ -78,35 +70,7 @@ def register_logging(app):
         app.logger.addHandler(file_handler)
 
 
-def register_extensions(app):
-    db.init_app(app)
-    login_manager.init_app(app)
-    # csrf.init_app(app)
-    ckeditor.init_app(app)
-    mail.init_app(app)
-    moment.init_app(app)
-    # toolbar.init_app(app)
-    dropzone.init_app(app)
-    whooshee.init_app(app)
-    avatars.init_app(app)
-    # socketio.init_app(app)
-    oauth.init_app(app)
-    cors.init_app(app)
-    redis_client.init_app(app)
-    # migrate.init_app(app, db)
 
-
-def register_blueprints(app):
-    # app.register_blueprint(admin_bp, url_prefix='/admin')
-    app.register_blueprint(auth_bp, url_prefix='/auth')
-    app.register_blueprint(user_bp, url_prefix='/user')
-
-
-    # register blueprints
-    # for bp in blueprints:
-    #     app.register_blueprint(bp)
-#
-#
 # def register_shell_context(app):
 #     @app.shell_context_processor
 #     def make_shell_context():

@@ -2,14 +2,17 @@ import hashlib
 from datetime import datetime
 
 from flask import current_app
-from flask_login import UserMixin, AnonymousUserMixin
+from flask_login import UserMixin as UM, AnonymousUserMixin
 from werkzeug.security import generate_password_hash, check_password_hash
 
-from newsdph.extensions import login_manager, db
+from newsdph.extensions import db
+from newsdph.extensions.login import login_manager
 from newsdph.utils.db import execute, fetch_to_dict
 
 
-class User(UserMixin):
+
+
+class User(UM):
 
     @classmethod
     def get_user_message_by_id(cls, id, *args, **kwargs):
@@ -31,6 +34,11 @@ class User(UserMixin):
         cls.locked = data['locked']
         cls.role_id = data['role_id']
         return super().__new__(cls, *args, **kwargs)
+
+    def get_roles(self):
+        sql = ""
+        role = ["admin", "user", ['moderator', 'contributor']]
+
 
     @classmethod
     def query_user(cls, **kwargs):
