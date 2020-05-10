@@ -6,7 +6,7 @@ login_manager = LoginManager()
 @login_manager.user_loader
 def user_loader(id):
     from newsdph.models import User
-    user = User(user_id)
+    user = User.get_user_message_by_id(id)
     return user
 
 class Guest(AnonymousUserMixin):

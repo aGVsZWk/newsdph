@@ -2,7 +2,7 @@ import hashlib
 from datetime import datetime
 
 from flask import current_app
-from flask_login import UserMixin as UM, AnonymousUserMixin
+from flask_login import UserMixin, AnonymousUserMixin
 from werkzeug.security import generate_password_hash, check_password_hash
 
 from newsdph.extensions import db
@@ -10,14 +10,10 @@ from newsdph.extensions.login import login_manager
 from newsdph.utils.db import execute, fetch_to_dict
 
 
-
-
-class User(UM):
-
+class User(UserMixin):
     @classmethod
     def get_user_message_by_id(cls, id, *args, **kwargs):
-        sql = "select id, name, sex, hobby, age, birthday, email, address, "
-        "phone, avatar, role_id, locked from user where id=:id"
+        sql = "select id, name, sex, hobby, age, birthday, email, address, phone, avatar, role_id, locked from user where id=:id"
         params = {"id": id}
         data = fetch_to_dict(sql=sql, params=params, fetch="one")
         cls.exist = True if data else False
@@ -39,7 +35,6 @@ class User(UM):
         sql = ""
         role = ["admin", "user", ['moderator', 'contributor']]
 
-
     @classmethod
     def query_user(cls, **kwargs):
         basesql = 'select id, name, sex, age, birthday, email, username,' + \
@@ -51,15 +46,12 @@ class User(UM):
         if kwargs.get('sex'):
             condition += 'and sex = :sex'
 
-
         # name, sex, age, age_gt, age_lt, age_gte, age_lte, birday,
         # birday_gt, birday_lt, birday_gte, birday_lte, email, username, address,
         # phone, register_time_gt, register_time_lt, register_time_gte,
         # register_time_lte, login_time_gt, login_time_lt, login_time_gte,
         # login_time_lte, confirmed, locked, active, role, order, desc
-        #
-        #
-        #
+
         pass
 
     def set_password(self, password):

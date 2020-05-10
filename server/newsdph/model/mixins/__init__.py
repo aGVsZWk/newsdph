@@ -1,6 +1,6 @@
-from .db import UserMixin as _UserMixin
+from flask_login import UserMixin as _UserMixin
 from .mail import MailMixin
-from .model import ModelMixin
+from .db import ModelMixin
 
 class UserMixin(_UserMixin, MailMixin, ModelMixin):
     @declared_attr
