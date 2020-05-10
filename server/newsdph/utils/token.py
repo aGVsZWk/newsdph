@@ -28,7 +28,6 @@ def generate_token(id, operation, expire_in=None, **kwargs):
 
 def validate_token(user, token, operation, new_password=None):
     s = Serializer(current_app.config['SECRET_KEY'])
-
     try:
         data = s.loads(token)
     except (SignatureExpired, BadSignature):

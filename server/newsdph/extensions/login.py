@@ -2,12 +2,12 @@ from flask_login import LoginManager, AnonymousUserMixin
 
 login_manager = LoginManager()
 
+
 @login_manager.user_loader
-def load_user(user_id):
+def user_loader(id):
     from newsdph.models import User
     user = User(user_id)
     return user
-
 
 class Guest(AnonymousUserMixin):
 
@@ -28,8 +28,7 @@ def init_app(app):
 
     login_manager.anonymous_user = Guest
 
-
-    login_manager.login_view = "auth.login"
+    login_manager.login_view = "auth.login"     # not login will redirect this view
     # remember me only work with `basic` rathar than `strong`
     login_manager.session_protection = "basic"
     # login_manager.login_message = _("Please login to access this page.")

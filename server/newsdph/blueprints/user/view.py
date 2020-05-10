@@ -15,15 +15,18 @@ user_bp = Blueprint('user', __name__)
 
 
 @user_bp.route('/profile/<int:id>')
+# @login_required
 def get_profile(id):
     sql = "select id, name, sex, hobby, age, birthday, email, username, phone, avatar, confirmed, locked, active, role_id from user where id = :id"
     params = {"id": id}
+    # print(current_user)
     data = fetch_to_dict(sql=sql, params=params, fetch="one")
     status = 1 if data else 0
     return make_response(data=data, status=status)
 
 
 @user_bp.route('/profile')
+@login_required
 @use_args(scheme.profile, location="query")
 def query_profile(args):
     condition = " where id > 0"
