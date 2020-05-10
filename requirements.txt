@@ -1,5 +1,6 @@
 amqp==2.5.2
 Authlib==0.14.2
+Babel==2.8.0
 billiard==3.6.3.0
 blinker==1.4
 celery==4.4.2
@@ -13,6 +14,7 @@ Faker==4.0.3
 flake8==3.7.9
 Flask==1.1.2
 Flask-Avatars==0.2.2
+Flask-Babel==1.0.0
 Flask-CKEditor==0.4.4.1
 Flask-Cors==3.0.8
 Flask-DebugToolbar==0.11.0
@@ -50,6 +52,7 @@ python-dateutil==2.8.1
 python-dotenv==0.13.0
 python-engineio==3.12.1
 python-socketio==4.5.1
+python-sql==1.1.0
 pytz==2020.1
 redis==3.5.0
 requests==2.23.0

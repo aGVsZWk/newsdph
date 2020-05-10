@@ -1,7 +1,11 @@
 from newsdph.extensions import db
 
 
-def fetch_to_dict(sql, params={}, fetch='all', bind=None):
+import pymysql
+
+
+
+def fetch_to_dict(sql, params=(), fetch='all', bind=None):
     '''
     dict的方式返回数据
     :param sql: select * from xxx where name=:name
@@ -10,9 +14,12 @@ def fetch_to_dict(sql, params={}, fetch='all', bind=None):
     :param bind:连接的数据，默认取配置的SQLALCHEMY_DATABASE_URL，
     :return:
     '''
-    resultProxy = db.session.execute(sql, params, bind=db.get_engine(bind=bind))
+    print(sql, params)
+    resultProxy = db.engine.execute(sql, params, bind=db.get_engine(bind=bind))
+    print(resultProxy)
     if fetch == 'one':
         result_tuple = resultProxy.fetchone()
+        print(result_tuple)
         if result_tuple:
             result = dict(zip(resultProxy.keys(), list(result_tuple)))
         else:
@@ -31,7 +38,7 @@ def fetch_to_dict(sql, params={}, fetch='all', bind=None):
 
 
 # 分页
-def fetch_to_dict_pagetion(sql, params={}, page=1, page_size=15, bind=None):
+def fetch_to_dict_pagetion(sql, params=(), page=1, page_size=15, bind=None):
     sql_count = """select count(*) as count from (%s) _count""" % sql
     total_count = get_count(sql_count, params, bind=bind)
     sql_page = '%s limit %s,%s' % (sql, (page - 1) * page_size, page_size)
@@ -42,20 +49,18 @@ def fetch_to_dict_pagetion(sql, params={}, page=1, page_size=15, bind=None):
 
 
 # 执行单条语句（update,insert）
-def execute(sql, params={}, bind=None):
-    print('sql', sql)
-    db.session.execute(sql, params, bind=db.get_engine(bind=bind))
-    db.session.commit()
+def execute(sql, params=(), bind=None):
+    db.engine.execute(sql, params, bind=db.get_engine(bind=bind))
+    # db.session.commit()
 
 
-def get_count(sql, params={}, bind=None):
+def get_count(sql, params=(), bind=None):
     return int(fetch_to_dict(sql, params, fetch='one', bind=bind).get('count'))
 
 
 
 # 执行多条语句，失败自动回滚
 def execute_many(sqls):
-    print(sqls)
     if not isinstance(sqls, (list, tuple)):
         raise Exception('type of the parameters must be list or tuple')
     if len(sqls) == 0:

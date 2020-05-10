@@ -1,26 +1,37 @@
 from newsdph.models import User
 from flask import Blueprint, jsonify, request, current_app
 from flask_login import login_user, logout_user, login_required, current_user, login_fresh, confirm_login
-from newsdph.extensions import db, redis_client
+from newsdph.extensions import redis_client
 from newsdph.settings import Operations
 from newsdph.utils.token import generate_token, validate_token
 from newsdph.utils.response import make_response
 from newsdph.utils.uid import get_capta
 from newsdph.utils.email import send_verify_email
+from newsdph.utils.db import fetch_to_dict
 from newsdph.schemas import AuthLoginSchema, AuthVerifySchema, AuthRegisterSchema
 from werkzeug.security import generate_password_hash, check_password_hash
 
 auth_bp = Blueprint('auth', __name__)
+
+from sql import *
+from sql.aggregate import *
+from sql.conditionals import *
+
 
 # 登录
 @auth_bp.route('/login', methods=['POST'])
 def login():
     data = request.get_json()
     schema = AuthLoginSchema()
-
     validated_data = schema.load(data)
-    user = User.get_user_by_username(validated_data['username'])
-    schema_data = schema.dump(user)
+    user = Table('user')
+    select = user.select(user.id, user.password, user.register_time, user.last_login_time, user.avatar, user.confirmed, user.locked, user.actived)
+    select.where = user.username == validated_data['username']
+    sql, params = tuple(select)
+    user_data = fetch_to_dict(sql, params, fetch="one")
+    print(user_data)
+
+
     if user.exist and check_password_hash(user.password_hash, validated_data['password']) and login_user(user, remember=validated_data['remember']):
         schema_data = schema.dump(user)
         schema_data["token"] = generate_token(schema_data["id"], operation="login").decode()

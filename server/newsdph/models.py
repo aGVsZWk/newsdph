@@ -10,25 +10,14 @@ from newsdph.extensions.login import login_manager
 from newsdph.utils.db import execute, fetch_to_dict
 
 
+
+
 class User(UserMixin):
     @classmethod
     def get_user_message_by_id(cls, id, *args, **kwargs):
         sql = "select id, name, sex, hobby, age, birthday, email, address, phone, avatar, role_id, locked from user where id=:id"
         params = {"id": id}
         data = fetch_to_dict(sql=sql, params=params, fetch="one")
-        cls.exist = True if data else False
-        cls.id = data['id']
-        cls.name = data['name']
-        cls.sex = data['sex']
-        cls.hobby = data['hobby']
-        cls.age = data['age']
-        cls.birthday = data['birthday']
-        cls.email = data['email']
-        cls.address = data['address']
-        cls.phone = data['phone']
-        cls.avatar = data['avatar']
-        cls.locked = data['locked']
-        cls.role_id = data['role_id']
         return super().__new__(cls, *args, **kwargs)
 
     def get_roles(self):
@@ -69,7 +58,7 @@ class User(UserMixin):
 
     @classmethod
     def get_user_by_username(cls, username, *args, **kwargs):
-        sql = "select id, confirmed, password, locked, active from user where username=:username"
+        sql = "select id, confirmed, password, locked, actived from user where username=:username"
         params = {"username": username}
         data = fetch_to_dict(sql=sql, params=params, fetch="one")
         cls.exist = True if data else False
