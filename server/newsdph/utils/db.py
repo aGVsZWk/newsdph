@@ -4,6 +4,8 @@ from newsdph.extensions import db
 import pymysql
 
 
+('SELECT "a"."id", "a"."password", "a"."register_time", "a"."last_login_time", "a"."avatar", "a"."confirmed", "a"."locked", "a"."actived" FROM "user" AS "a" WHERE ("a"."username" = %s)',
+ ('aGVsZWk',))
 
 def fetch_to_dict(sql, params=(), fetch='all', bind=None):
     '''
@@ -15,7 +17,7 @@ def fetch_to_dict(sql, params=(), fetch='all', bind=None):
     :return:
     '''
     print(sql, params)
-    resultProxy = db.engine.execute(sql, params, bind=db.get_engine(bind=bind))
+    resultProxy = db.session.execute(sql, params, bind=db.get_engine(bind=bind))
     print(resultProxy)
     if fetch == 'one':
         result_tuple = resultProxy.fetchone()
@@ -50,8 +52,8 @@ def fetch_to_dict_pagetion(sql, params=(), page=1, page_size=15, bind=None):
 
 # 执行单条语句（update,insert）
 def execute(sql, params=(), bind=None):
-    db.engine.execute(sql, params, bind=db.get_engine(bind=bind))
-    # db.session.commit()
+    db.session.execute(sql, params, bind=db.get_engine(bind=bind))
+    db.session.commit()
 
 
 def get_count(sql, params=(), bind=None):

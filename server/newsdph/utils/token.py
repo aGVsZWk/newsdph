@@ -13,7 +13,6 @@ from itsdangerous import BadSignature, SignatureExpired
 from itsdangerous import TimedJSONWebSignatureSerializer as Serializer
 
 from newsdph.extensions import db
-from newsdph.models import User
 from newsdph.settings import Operations
 
 

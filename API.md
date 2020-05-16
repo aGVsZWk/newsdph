@@ -20,6 +20,7 @@ POST
 {
     "code": 200,
     "msg":"铁憨憨!登录成功",
+    "msg_type": "s",
     "payload":{
         "id": 1,
         "confirmed": 1,
@@ -47,6 +48,7 @@ GET
 {
   "code": 200,
   "msg": "铁憨憨!获取用户信息成功!!!",
+  "msg_type": "s",
   "payload": {
     "count": 1,
     "data": [
@@ -91,6 +93,7 @@ POST
 {
     "code": 200,
     "msg":"铁憨憨!注册成功，请点击邮件进行激活！",
+    "msg_type": "s",
     "payload":{
         "status":1
     }
@@ -113,6 +116,7 @@ POST
 {
     "code": 200,
     "msg":"铁憨憨!验证码已发送至邮箱，有效期3分钟！",
+    "msg_type": "s",
     "payload":{
         "status":1
     }

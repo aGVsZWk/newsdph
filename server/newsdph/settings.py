@@ -81,6 +81,16 @@ class BaseConfig(object):
     WHOOSHEE_MIN_STRING_LEN = 1
 
     VERIFY_CODE_LIFETIME = 30     # 验证码有效期
+
+    CURRENT_VERSION = os.getenv('CURRENT_VERSION')
+
+    LOGIN_IN_TO = "/"
+    LOGIN_OUT_TO = "/"
+    OPEN_REGISTER = 1
+    LOGIN_VIEW = '/user/login'
+    PW_WRONG_NUM_VERIFY_CODE = 5
+
+
     # AVATARS_SAVE_PATH = os.path.join(ALBUMY_UPLOAD_PATH, 'avatars')
     # AVATARS_SIZE_TUPLE = (30, 100, 200)
     # MAX_CONTENT_LENGTH = 3 * 1024 * 1024  # file size exceed to 3 Mb will return a 413 error response.
