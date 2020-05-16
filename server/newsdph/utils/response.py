@@ -1,13 +1,22 @@
 from flask import jsonify
 
-def make_response(data, status=1, code=200, message=("nice!", "s")):
+def make_response(data, code=200, message=("nice!", "s")):
+    if code >= 200 and code < 300:
+        status = 1
+    else:
+        status = 0
     if data and isinstance(data, dict):
         payload = {
             "status": status,
             **data
         }
     if not isinstance(message, tuple) or len(message) != 2:
-        return jsonify({})
+        return jsonify({
+            "code": 500,
+            "msg": "msg error",
+            "msg_type": "e",
+            "payload":{"status":0}
+        })
     elif data and isinstance(data, list):
         payload = {
             "data": data,

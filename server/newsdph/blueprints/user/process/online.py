@@ -1,8 +1,8 @@
 from flask import current_app
 from flask_login import current_user
 from newsdph.utils.verify import short_str_verifi, password_format_ver, email_format_ver, mobile_phone_format_ver
-from newsdph.blueprints.user.user import get_one_user
-from newsdph.utils.utils.uid import verify_capta
+from newsdph.blueprints.user.user import get_one_user, insert_one_user, user_model
+from newsdph.utils.uid import verify_capta
 
 
 def p_sign_up(username, password, password2, code, email=None, mobile_phone_number=None, next=None):
@@ -82,8 +82,8 @@ def p_sign_up(username, password, password2, code, email=None, mobile_phone_numb
                           mphone_num=mobile_phone_number,
                           password=password,
                           role_id=role_id,
-                          active=True
-                            )
+                          active=True)
+
         r = insert_one_user(updata=user)
         if r:
             # 发送邮件

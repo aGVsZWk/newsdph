@@ -5,10 +5,10 @@ import click
 from flask import Flask, render_template, request
 # from flask_sqlalchemy import get_debug_queries
 # from bluelog.models import Admin, Post, Category, Comment, Link
-from .settings import config, CeleryConfig
-from .extensions import register_extensions
-from .blueprints import register_blueprints
-from .log import register_logging
+from newsdph.settings import config, CeleryConfig
+from newsdph.extensions import register_extensions
+from newsdph.blueprints import register_blueprints
+from newsdph.log import register_logging
 
 DEFAULT_APP_NAME = 'newsdph'
 
@@ -16,7 +16,7 @@ def create_app(config_name):
     app_name = DEFAULT_APP_NAME
     app = Flask(app_name)
     app.config.from_object(config[config_name])
-    register_logging(app)
+    # register_logging(app)
     register_extensions(app)
     register_blueprints(app)
     # register_commands(app)

@@ -26,7 +26,6 @@ from authlib.integrations.flask_client import OAuth
 from flask_cors import CORS
 from flask_redis import FlaskRedis
 from flask_marshmallow import Marshmallow
-
 from . import babel, login
 
 
@@ -35,9 +34,6 @@ from . import babel, login
 # from flask_principal import Principal
 # from flask_msearch import Search
 # from flask_caching import Cache
-
-
-
 
 db = SQLAlchemy()
 csrf = CSRFProtect()

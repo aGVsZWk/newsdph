@@ -5,7 +5,10 @@
 # @Author : Allen Woo
 from flask import url_for
 from flask_login import current_user
-import regex as re
+try:
+    import regex as re
+except:
+    import re
 
 def short_str_verifi(short_str, project=None, allow_special_chart=False):
     """
