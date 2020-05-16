@@ -68,7 +68,7 @@ def p_sign_up(username, password, password2, code, email=None, mobile_phone_numb
             error_code = 403
             data['status'] = 0
         if data:
-            return data
+            return data, error_code, message
         # 检验验证码
         r = verify_capta(code=code, tel_number=mobile_phone_number)
         if not r:

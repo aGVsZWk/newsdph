@@ -20,12 +20,10 @@ def register():
     password2 = data.get('password2')
     code = data.get('code')
     mphone = data.get('mphone')
-    data, error_code, message = p_sign_up(username=username,
-                                          password=password,
-                                          password2=password,
-                                          code=code,
-                                          email=email,
-                                          mobile_phone_number=mphone)
+    if not email and not mphone:
+        return make_response(data={}, code=400, message=("参数不全", "e"))
+    print(email, username, password, password2, code, mphone)
+    data, error_code, message = p_sign_up(username=username, password=password, password2=password2, code=code, email=email, mobile_phone_number=mphone)
     return make_response(data, error_code, message)
 
 

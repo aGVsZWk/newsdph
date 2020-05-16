@@ -56,13 +56,13 @@ def user_model(**kwargs):
     :param kwargs:
     :return:
     """
-    is_adm_add_user = kwargs.get("is_adm_add_user")
+    is_admin_add_user = kwargs.get("is_admin_add_user")
     unionid = kwargs.get("unionid")
     if not unionid:
         # 非第三方平台登录注册
         if not kwargs.get("username"):
             return None
-        if not is_adm_add_user:
+        if not is_admin_add_user:
             if not kwargs.get("email") and not kwargs.get("mphone_num"):
                 return None
 
