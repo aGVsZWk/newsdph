@@ -90,7 +90,7 @@ class BaseConfig(object):
     LOGIN_VIEW = '/user/login'
     PW_WRONG_NUM_VERIFY_CODE = 5
 
-
+    LOGIN_LIFETIME = 36000
     # AVATARS_SAVE_PATH = os.path.join(ALBUMY_UPLOAD_PATH, 'avatars')
     # AVATARS_SIZE_TUPLE = (30, 100, 200)
     # MAX_CONTENT_LENGTH = 3 * 1024 * 1024  # file size exceed to 3 Mb will return a 413 error response.
@@ -140,6 +140,7 @@ class DevelopmentConfig(BaseConfig):
     # SESSION_USE_SIGNER = True
     # PERMANENT_SESSION_LIFETIME = 3600*24*2 # 两天有效期，默认是秒
     # VERIFY_CODE_LIFETIME = 60     # 验证码有效期
+    LOGIN_LIFETIME = 3600000
 
 
 class TestingConfig(BaseConfig):
@@ -149,6 +150,7 @@ class TestingConfig(BaseConfig):
 
 class ProductionConfig(BaseConfig):
     SQLALCHEMY_DATABASE_URI = os.getenv('DATABASE_URL', prefix + os.path.join(basedir, 'data.db'))
+    LOGIN_LIFETIME = 72000
 
 
 config = {

@@ -11,7 +11,7 @@
 # Description:
 # **************************************************************************
 from datetime import datetime, timedelta
-from werkzeug.security import generate_password_hash
+from werkzeug.security import check_password_hash, generate_password_hash
 from flask import current_app
 from flask_login import UserMixin, current_user, AnonymousUserMixin
 from flask_babel import gettext
@@ -135,7 +135,7 @@ class User(UserMixin):
     def password(self):
         raise ArithmeticError(gettext('Password is not a readable attribute'))
 
-    def validate_password(self, password):
+    def verify_password(self, password):
         user = get_one_user(user_id=self.id)
         return check_password_hash(user["password"], password)
 
@@ -146,6 +146,10 @@ class User(UserMixin):
     @property
     def is_active(self):
         return self.actived
+
+    @property
+    def is_delete(self):
+        return self.deleted
 
     @property
     def is_authenticated(self):
