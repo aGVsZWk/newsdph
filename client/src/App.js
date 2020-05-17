@@ -8,7 +8,7 @@ class App extends Component {
   constructor(props) {
     super(props);
     // console.log('app', this.props);
-    // 只要地址栏的hash变化，listen就会被触发，参数locationd代表当前url地址
+    // 只要地址栏的hash变化，listen就会被触发，参数location代表当前url地址
     this.props.history.listen((location) => {
       console.log("location", location);
       let pathname = location.pathname;

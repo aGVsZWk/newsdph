@@ -12,7 +12,7 @@ const Dashboard = Loadable({
   loading: Loading,
 });
 const Login = Loadable({
-  loader: () => import ("./Login/index.jsx"),
+  loader: () => import ("./Login"),
   loading: Loading,
 });
 const NotFound = Loadable({
@@ -33,6 +33,11 @@ const FileExport = Loadable({
   loading: Loading,
 });
 
+const ReduxTest = Loadable({
+  loader: () => import("./ReduxTest"),
+  loading: Loading,
+});
+
 export {
   Article,
   Dashboard,
@@ -41,4 +46,5 @@ export {
   Setting,
   Notify,
   FileExport,
+  ReduxTest
 };

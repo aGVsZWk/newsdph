@@ -1,4 +1,4 @@
-import {Article, Dashboard, Login, NotFound, Setting, Notify, FileExport} from "@/pages";
+import {Article, Dashboard, Login, NotFound, Setting, Notify, FileExport, ReduxTest} from "@/pages";
 
 const commonRoutes = [
   {
@@ -7,6 +7,10 @@ const commonRoutes = [
   }, {
     pathname: "/404",
     component: NotFound,
+  },
+  {
+    pathname: "/redux",
+    component: ReduxTest,
   },
 ];
 
