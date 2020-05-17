@@ -1,6 +1,4 @@
 import React, {Component} from "react";
-import logo from "./logo.svg";
-import {Button, Pagination} from "antd";
 import {privateRoutes} from "./routers";
 import {Route, Switch, Redirect} from "react-router-dom";
 import FrameOut from "@/components/FrameOut";
@@ -13,8 +11,8 @@ class App extends Component {
     // 只要地址栏的hash变化，listen就会被触发，参数locationd代表当前url地址
     this.props.history.listen((location) => {
       console.log("location", location);
-      var pathname = location.pathname;
-      var findOne = privateRoutes.find((item) => {
+      let pathname = location.pathname;
+      let findOne = privateRoutes.find((item) => {
         return item.pathname === pathname;
       });
       console.log("findOne", findOne);
