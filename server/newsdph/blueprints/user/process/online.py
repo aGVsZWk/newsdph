@@ -1,9 +1,9 @@
 from flask import current_app
-from flask_login import current_user
+from flask_login import current_user, login_user, logout_user, login_fresh
 from newsdph.utils.verify import short_str_verifi, password_format_ver, email_format_ver, mobile_phone_format_ver
 from newsdph.blueprints.user.user import get_one_user, insert_one_user, user_model, User
 from newsdph.utils.uid import verify_capta
-
+from newsdph.utils.token import generate_token
 
 def p_sign_up(username, password, password2, code, email=None, mobile_phone_number=None, next=None):
     data = {}
@@ -103,7 +103,7 @@ def p_sign_up(username, password, password2, code, email=None, mobile_phone_numb
 def p_sign_in(
         username,
         password,
-        code_url_obj,
+        code_url,
         code,
         remember_me,
         use_jwt_auth=0,
@@ -116,7 +116,7 @@ def p_sign_in(
     data = {}
     if current_user.is_authenticated and username in [current_user.username,
                                                       current_user.email,
-                                                      current_user.mphone_num]:
+                                                      current_user.mphone]:
         message = ("Is logged in", "s")
         error_code = 201
         data["to_url"] = next or current_app.config["LOGIN_IN_TO"]
@@ -153,13 +153,13 @@ def p_sign_in(
         if user.is_active:
             if use_jwt_auth:
                 data["access_token"], data["expires_in"] = generate_token(user)
-                data["token_type"] = 'Bearer',
+                data["token_type"] = 'Bearer'
                 client = "app"
             else:
                 login_user(user, remember_me)
                 client = "browser"
             # 记录登录日志
-            login_log(user, client)
+            # login_log(user, client)
             message = ("Sign in success", "s")
             error_code = 201
             data["to_url"] = next or current_app.config["LOGIN_IN_TO"]

@@ -1,7 +1,7 @@
 from flask import Blueprint, jsonify, request, current_app
 from flask_login import login_user, logout_user, login_required, current_user, login_fresh, confirm_login
 from newsdph.settings import Operations
-from newsdph.utils.token import generate_token
+from newsdph.utils.token import clean_login_token
 from newsdph.utils.response import make_response
 from newsdph.utils.uid import get_capta
 from newsdph.utils.db import fetch_to_dict
@@ -96,13 +96,45 @@ def login():
     data, error_code, message = p_sign_in(
         username=username,
         password=password,
-        password2=password2,
         code=code, code_url=code_url,
         remember_me=remember_me,
         use_jwt_auth=use_jwt_auth)
-    return make_response(data, error_code, messages)
+    return make_response(data, error_code, message)
 
 
+# 退出登录
+@user_bp.route('/logout', methods=['POST'])
+def logout():
+    """
+    GET or PUT:
+        用户登出api
+        use_jwt_auth:<int>, 是否使用jwt验证. 0 或 1,默认为0不使用.
+                     如果是jwt验证登录信息的客户端use_jwt_auth应为1
+        :param adm:
+        :return:
+    """
+    data = request.get_json()
+    use_jwt_auth = data.get("use_jwt_auth", 0)
+    if use_jwt_auth:
+        s, r = clean_login_token()
+        if s:
+            data  = {
+                "to_url": current_app.config["LOGIN_OUT_TO"]
+            }
+            error_code = 201
+            message = ("Successfully logged out", "s")
+        else:
+            data = {}
+            error_code = 400
+            message = (r, "e")
+    else:
+        logout_user()
+        data = {
+            "to_url" : current_app.config["LOGIN_OUT_TO"]
+        }
+        error_code = 201
+        message = ("Successfully logged out", "s")
+    return make_response(data, error_code, message)
 
 
 # 获取验证码

@@ -31,7 +31,7 @@ def validate_token(token):
     user = User.query.get(data['id'])
     if user is None:
         return False
-    g.current_user = user
+    # g.current_user = user
     return True
 
 
@@ -46,8 +46,22 @@ def get_token():
             token_type = token = None
     else:
         token_type = token = None
-
     return token_type, token
+
+
+def clean_login_token():
+    token, token_type = get_token()
+    if token:
+        # payload = validate_token()
+        user = True
+        if not user:
+            result = (None, "User authentication failed, user does not exist")
+        else:
+            # todo update database jwt_login_time
+            result = (True, "")
+    else:
+        result = (None, "No user authentication token provided")
+    return result
 
 
 def auth_required(f):
