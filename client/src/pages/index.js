@@ -33,6 +33,17 @@ const FileExport = Loadable({
   loading: Loading,
 });
 
+const FileUpload = Loadable({
+  loader: () => import("./FileUpload"),
+  loading: Loading,
+});
+
+const VideoPlay = Loadable({
+  loader: () => import("./VideoPlay"),
+  loading: Loading,
+});
+
+
 const ReduxTest = Loadable({
   loader: () => import("./ReduxTest"),
   loading: Loading,
@@ -46,5 +57,7 @@ export {
   Setting,
   Notify,
   FileExport,
-  ReduxTest
+  FileUpload,
+  VideoPlay,
+  ReduxTest,
 };

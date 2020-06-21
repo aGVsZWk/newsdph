@@ -1,22 +1,7 @@
 import React from "react";
 import PropTypes from "prop-types";
-import {
-  Layout,
-  Menu,
-  Breadcrumb,
-  Divider,
-  Row,
-  Col,
-  Tag,
-  Table,
-  Button,
-  Anchor,
-  DatePicker,
-  Card,
-  Select,
-  Form,
-  Input,
-  InputNumber,
+import { Layout, Menu, Breadcrumb, Divider, Row, Col, Tag, Table, Button,
+  Anchor, DatePicker, Card, Select, Form, Input, InputNumber,
 } from "antd";
 import {UserOutlined, LaptopOutlined, NotificationOutlined} from "@ant-design/icons";
 import api from "@/api";
@@ -66,7 +51,7 @@ const columns = [
     dataIndex: "tags",
     render: tags => (
       <span>
-				{
+        {
           tags.map(tag => {
             let color = tag.length > 5 ? "geekblue" : "green";
             if (tag === "loser") {
@@ -77,17 +62,17 @@ const columns = [
             </Tag>);
           })
         }
-			</span>
+      </span>
     ),
   }, {
     title: "操作",
     key: "operate",
     render: (text, record) => (
       <span>
-				<Button type='link'>修改</Button>
-				<Divider type='vertical' />
-				<Button type='link'>删除</Button>
-			</span>
+        <Button type='link'>修改</Button>
+        <Divider type='vertical' />
+        <Button type='link'>删除</Button>
+      </span>
     ),
   },
 ];
@@ -101,7 +86,7 @@ class Home extends React.Component {
       tableData: [],
     };
   }
-  
+
   onFinish = (fieldsValues) => {
     const birthRangeValue = fieldsValues["birth"];
     const name = fieldsValues["name"];
@@ -129,7 +114,7 @@ class Home extends React.Component {
       console.log(err);
     });
   };
-  
+
   render() {
     const formItemLayout = {
       labelCol: {
@@ -149,7 +134,7 @@ class Home extends React.Component {
         },
       },
     };
-    
+
     return (<Layout>
       <Layout>
         <Layout.Sider width={200} className="site-layout-background">
@@ -161,22 +146,21 @@ class Home extends React.Component {
               height: "100%",
               borderRight: 0,
             }}>
-            <Menu.SubMenu key="sub1" title={<span> <UserOutlined />
-              subnav 1 </span>}>
+            <Menu.SubMenu key="sub1" title={<span> <UserOutlined /> subnav 1 </span>}>
               <Menu.Item key="1">option1</Menu.Item>
               <Menu.Item key="2">option2</Menu.Item>
               <Menu.Item key="3">option3</Menu.Item>
               <Menu.Item key="4">option4</Menu.Item>
             </Menu.SubMenu>
             <Menu.SubMenu key="sub2" title={<span> <LaptopOutlined />
-              subnav 2 </span>}>
+            subnav 2 </span>}>
               <Menu.Item key="5">option5</Menu.Item>
               <Menu.Item key="6">option6</Menu.Item>
               <Menu.Item key="7">option7</Menu.Item>
               <Menu.Item key="8">option8</Menu.Item>
             </Menu.SubMenu>
             <Menu.SubMenu key="sub3" title={<span> <NotificationOutlined />
-              subnav 3 </span>}>
+            subnav 3 </span>}>
               <Menu.Item key="9">option9</Menu.Item>
               <Menu.Item key="10">option10</Menu.Item>
               <Menu.Item key="11">option11</Menu.Item>
@@ -197,7 +181,7 @@ class Home extends React.Component {
             margin: 0,
             minHeight: 280,
           }}>
-            
+
             <Form {...formItemLayout} layout="inline" onFinish={this.onFinish}>
               <Row gutter={24}>
                 <Col span={8}>
@@ -272,15 +256,15 @@ class Home extends React.Component {
                   <Button style={{margin: "0 8px"}}>清空</Button>
                 </Col>
               </Row>
-            
+
             </Form>
-            
+
             <Table columns={columns} dataSource={this.data} />
           </Layout.Content>
         </Layout>
       </Layout>
     </Layout>);
-  }
+}
 }
 
 export default Home;

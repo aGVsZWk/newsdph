@@ -21,11 +21,11 @@ class Notify extends Component {
     super(props);
     this.state = {};
   }
-  
+
   render() {
     return (<div>
       <Card title="通知中心" extra={<Button>全部標記為已讀</Button>}>
-        
+
         <List
           itemLayout="horizontal"
           dataSource={data}
@@ -40,10 +40,10 @@ class Notify extends Component {
           )}
         />,
       </Card>
-    
+
     </div>);
-  }
-  
+}
+
 }
 
 export default Notify;

@@ -5,13 +5,15 @@ class Setting extends Component {
     super(props);
     this.state = {};
   }
-  
+
   render() {
-    return (<div>
-      <h2>Setting页面</h2>
-    </div>);
+    return (
+      <div>
+        <h2>Setting页面</h2>
+      </div>
+    );
   }
-  
+
 }
 
 export default Setting;

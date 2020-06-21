@@ -21,7 +21,7 @@ class FrameOut extends Component {
     super(props);
     this.state = {};
   }
-  
+
   handleMenuClick = ({item, key, keyPath, domEvent}) => {
     this.props.history.push(key);
   };
@@ -43,77 +43,74 @@ class FrameOut extends Component {
         </div>
       </Menu.Item>
     </Menu>
-  );
-  
-  render() {
-    return (
-      <Layout style={{
-        minHeight: "100%",
-      }}>
-        <Header>
-          <Row>
-            <Col span={8}>
-              <h2 style={{
-                color: "#fff",
-              }}>CMS 管理系统</h2>
-            </Col>
-            <Col span={3} offset={13}>
-              <div style={{
-                color: "#fff",
-              }}>
-                <Dropdown overlay={this.menu}>
-                  <Badge count={25}>
-                    <div style={{
-                      color: "#fff",
-                    }}>
-                      <Avatar src="https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png" />
-                      欢迎您 xxx !
-                      <DownOutlined />
-                    </div>
-                  </Badge>
-                </Dropdown>
-              </div>
-            
-            </Col>
-          </Row>
-        
-        </Header>
-        <Layout>
-          <Sider width={200} className="site-layout-background">
-            <Menu
-              mode="inline"
-              defaultSelectedKeys={topMenus[0].pathname}
-              defaultOpenKeys={["sub1"]}
-              style={{
-                height: "100%",
-                borderRight: 0,
-              }}>
-              {
-                topMenus.map((item) => {
-                  return (<Menu.Item key={item.pathname} onClick={this.handleMenuClick}>{item.title}</Menu.Item>);
-                })
-              }
-            </Menu>
-          </Sider>
-          {/* 不成文的规范：padding margin 建议是 8 的倍数*/}
-          <Layout style={{
-            padding: "24px",
-          }}>
-            
-            <Content
-              className="site-layout-background"
-              style={{
-                padding: 24,
-                margin: 0,
-                minHeight: 280,
-              }}>
-              {this.props.children}
-            </Content>
-          </Layout>
+);
+
+render() {
+  return (
+    <Layout style={{
+      minHeight: "100%",
+    }}>
+      <Header>
+        <Row>
+          <Col span={8}>
+            <h2 style={{
+              color: "#fff",
+            }}>CMS 管理系统</h2>
+          </Col>
+          <Col span={3} offset={13}>
+            <div style={{
+              color: "#fff",
+            }}>
+              <Dropdown overlay={this.menu}>
+                <Badge count={25}>
+                  <div style={{
+                    color: "#fff",
+                  }}>
+                    <Avatar src="https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png" />
+                    欢迎您 xxx !
+                    <DownOutlined />
+                  </div>
+                </Badge>
+              </Dropdown>
+            </div>
+          </Col>
+        </Row>
+      </Header>
+      <Layout>
+        <Sider width={200} className="site-layout-background">
+          <Menu
+            mode="inline"
+            defaultSelectedKeys={topMenus[0].pathname}
+            defaultOpenKeys={["sub1"]}
+            style={{
+              height: "100%",
+              borderRight: 0,
+            }}>
+            {
+              topMenus.map((item) => {
+                return (<Menu.Item key={item.pathname} onClick={this.handleMenuClick}>{item.title}</Menu.Item>);
+              })
+            }
+          </Menu>
+        </Sider>
+        {/* 不成文的规范：padding margin 建议是 8 的倍数*/}
+        <Layout style={{
+          padding: "24px",
+        }}>
+          <Content
+            className="site-layout-background"
+            style={{
+              padding: 24,
+              margin: 0,
+              minHeight: 280,
+            }}>
+            {this.props.children}
+          </Content>
         </Layout>
       </Layout>
-    );
-  }
+    </Layout>
+);
+}
 }
 
 export default FrameOut;

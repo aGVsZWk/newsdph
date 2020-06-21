@@ -11,7 +11,6 @@ import {ConfigProvider} from "antd";
 import { Provider } from 'react-redux'
 import store from './redux/index'
 
-
 // 路由操作
 import {HashRouter as Router, Route, Switch, Redirect} from "react-router-dom";
 
@@ -44,7 +43,7 @@ ReactDOM.render(
       </Router>
     </Provider>
   </ConfigProvider>,
-  
+
   document.getElementById(
     "root",
   ),

@@ -7,23 +7,23 @@ class Article extends Component {
     super(props);
     this.state = {};
   }
-  
+
   componentWillMount() {
     this.setState({isLoading: true});
     // Promise 存在 1：then 2：catch 3：finally
     api.article
-      .getArticles()
-      .then((value) => {
-        console.log(value);
-      })
-      .catch((err) => {
-        console.log(err);
-      })
-      .finally(() => {
-        this.setState({isLoading: false});
-      });
+    .getArticles()
+    .then((value) => {
+      console.log(value);
+    })
+    .catch((err) => {
+      console.log(err);
+    })
+    .finally(() => {
+      this.setState({isLoading: false});
+    });
   }
-  
+
   editHandler = (record) => {
     console.log(record);
     Modal.confirm({
@@ -40,7 +40,7 @@ class Article extends Component {
   backHandler = (record) => {
     this.props.history.goBack();
   };
-  
+
   render() {
     let record = {
       id: 1,
@@ -54,8 +54,8 @@ class Article extends Component {
         <Button onClick={this.goHandler.bind(this, record)}>Go</Button>
         <Button onClick={this.backHandler.bind(this, record)}>Back</Button>
       </Card>
-    );
-  }
+  );
+}
 }
 
 export default Article;

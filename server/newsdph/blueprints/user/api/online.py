@@ -9,6 +9,23 @@ from newsdph.schemas import AuthLoginSchema, AuthVerifySchema, AuthRegisterSchem
 from newsdph.blueprints.user import user_bp
 from newsdph.blueprints.user.process.online import p_sign_up, p_sign_in
 
+# 上传文件列表
+@user_bp.route('/fileListUplaod', methods=['POST'])
+def uploadFileList():
+    print("hahahah")
+    files = request.files
+    print(files)
+    return make_response({"nice": "nice"}, 200, "完美")
+
+
+@user_bp.route('/heartBeat')
+def heartBeat():
+    # print("你麻痹")
+    print('nice')
+    return make_response({"nice": "nice"}, 200, "完美")
+
+
+
 # 注册
 @user_bp.route('/register', methods=['POST'])
 def register():

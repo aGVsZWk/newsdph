@@ -5,11 +5,11 @@ class Loading extends Component {
     super(props);
     this.state = {};
   }
-  
+
   render() {
     return (<div>Loading...</div>);
   }
-  
+
 }
 
 export default Loading;

@@ -15,6 +15,19 @@ const ymarkInfoExport = params => http({
 })
 
 
+const fileListUplaod = (params) => http({
+  url: "/user/uploadFileList",
+  params,
+  method: 'post'
+})
+
+const heartBeat = (params) => http({
+  url: "http://127.0.0.1:8000/user/heartBeat",
+  params
+})
+
 export default {
     ymarkInfoExport,
+    fileListUplaod,
+    heartBeat
 }

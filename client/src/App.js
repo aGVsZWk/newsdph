@@ -4,7 +4,7 @@ import {Route, Switch, Redirect} from "react-router-dom";
 import FrameOut from "@/components/FrameOut";
 
 class App extends Component {
-  
+
   constructor(props) {
     super(props);
     // console.log('app', this.props);
@@ -19,7 +19,7 @@ class App extends Component {
       window.document.title = findOne && findOne.title;
     });
   }
-  
+
   render() {
     // 显示私有的路由  /admin/dashboard 二级路由 (rbac授权)
     return (
@@ -42,9 +42,9 @@ class App extends Component {
           <Redirect to='/404'></Redirect>
         </Switch>
       </FrameOut>
-    
-    );
-  }
-}
 
-export default App;
+      );
+    }
+  }
+
+  export default App;
