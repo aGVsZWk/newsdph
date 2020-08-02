@@ -1,5 +1,5 @@
 import {Article, Dashboard, Login, NotFound, Setting, Notify, FileExport,
-        VideoPlay, FileUpload, ReduxTest} from "@/pages";
+        VideoPlay, FileUpload} from "@/pages";
 
 const commonRoutes = [
   {
@@ -9,11 +9,7 @@ const commonRoutes = [
   {
     pathname: "/404",
     component: NotFound,
-  },
-  {
-    pathname: "/redux",
-    component: ReduxTest,
-  },
+  }
 ];
 
 const privateRoutes = [
@@ -62,7 +58,25 @@ const privateRoutes = [
 ];
 
 
-export {
-  commonRoutes,
-  privateRoutes,
-};
+// export const CommonRouteSwitch = (
+//   {
+//     commonRoutes.map((item, index) => {
+//       return (<Route key={item.pathname} path={item.pathname} component={item.component}></Route>)
+//     })
+//   }
+// )
+//
+// export const PrivateRouteSwitch = () => {
+//   return ({
+//     privateRoutes.map((item, index) => {
+//       return (
+//         <Route
+//           key={item.pathname}
+//           path={item.pathname}
+//           render={(rootProps) => {
+//             return <item.component {...rootProps} />;
+//           }} />
+//         )
+//       })
+//     })
+//   }

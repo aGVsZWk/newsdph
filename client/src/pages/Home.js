@@ -4,7 +4,7 @@ import { Layout, Menu, Breadcrumb, Divider, Row, Col, Tag, Table, Button,
   Anchor, DatePicker, Card, Select, Form, Input, InputNumber,
 } from "antd";
 import {UserOutlined, LaptopOutlined, NotificationOutlined} from "@ant-design/icons";
-import api from "@/api";
+import * as user from "@/api/user";
 // import '@/style/view-style/table.scss'
 
 const columns = [
@@ -105,7 +105,7 @@ class Home extends React.Component {
     };
     this.setState({formData: formData});
     console.log(this.state.formData);
-    api.user.getUserInfo(this.state.formData).then((res) => {
+    user.getUserInfo(this.state.formData).then((res) => {
       console.log(res);
       if (res.state === 0) {
         console.log("成功");

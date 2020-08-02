@@ -1,6 +1,6 @@
 import React, {Component} from "react";
 import {Card, Button, Modal} from "antd";
-import api from "@/api";
+import * as article from "@/api/article";
 
 class Article extends Component {
   constructor(props) {
@@ -11,8 +11,7 @@ class Article extends Component {
   componentWillMount() {
     this.setState({isLoading: true});
     // Promise 存在 1：then 2：catch 3：finally
-    api.article
-    .getArticles()
+    article.getArticles()
     .then((value) => {
       console.log(value);
     })

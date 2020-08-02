@@ -3,61 +3,54 @@ import Loading from "@/components/Loading";
 
 
 // 路由懒加载，解决首屏慢
-const Article = Loadable({
+export const Article = Loadable({
   loader: () => import ("./Article"),
   loading: Loading,
 });
-const Dashboard = Loadable({
+export const Dashboard = Loadable({
   loader: () => import ("./Dashboard"),
   loading: Loading,
 });
-const Login = Loadable({
+export const Login = Loadable({
   loader: () => import ("./Login"),
   loading: Loading,
 });
-const NotFound = Loadable({
+export const NotFound = Loadable({
   loader: () => import ("./NotFound"),
   loading: Loading,
 });
-const Setting = Loadable({
+export const Setting = Loadable({
   loader: () => import ("./Setting"),
   loading: Loading,
 });
-const Notify = Loadable({
+export const Notify = Loadable({
   loader: () => import ("./Notify"),
   loading: Loading,
 });
 
-const FileExport = Loadable({
+export const FileExport = Loadable({
   loader: () => import("./FileExport"),
   loading: Loading,
 });
 
-const FileUpload = Loadable({
+export const FileUpload = Loadable({
   loader: () => import("./FileUpload"),
   loading: Loading,
 });
 
-const VideoPlay = Loadable({
+export const VideoPlay = Loadable({
   loader: () => import("./VideoPlay"),
   loading: Loading,
 });
 
 
-const ReduxTest = Loadable({
-  loader: () => import("./ReduxTest"),
+export const BlackMusic = Loadable({
+  loader: () => import("./BlackMusic"),
   loading: Loading,
 });
 
-export {
-  Article,
-  Dashboard,
-  Login,
-  NotFound,
-  Setting,
-  Notify,
-  FileExport,
-  FileUpload,
-  VideoPlay,
-  ReduxTest,
-};
+
+export const TodoList = Loadable({
+  loader: () => import("./TodoList"),
+  loading: Loading,
+});

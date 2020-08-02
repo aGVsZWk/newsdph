@@ -1,7 +1,7 @@
 import {message} from "antd";
 
 import axios from "axios";
-import basicErrorCodes from "./basicErrorCodes";
+import basicErrorCodes from "@/constants/basicErrorCodes";
 
 const env = process.env;
 
@@ -33,13 +33,13 @@ class CommonHttp {
     this.method = "";
     this.errorCodes = null;
     this.responseAdapter = null;
-    
+
     this.requestHeaders = "";
-    
+
     this.withCredentials = false;
     this.headerContentType = "application/json; charset=utf-8";
   }
-  
+
   /**
    * 生成请求头
    */
@@ -52,7 +52,7 @@ class CommonHttp {
     //     requestHeaders.Authorization = token
     // }
   }
-  
+
   /**
    * 生成请求参数
    */
@@ -66,15 +66,15 @@ class CommonHttp {
     });
     this.params = params;
     // const token = store.state.auth.token
-    
+
     // if (debug) {
     //     requestParams.token = token
     // }
   }
-  
+
   requestInterceptor() {
     const {method, url} = this;
-    const requestMethod = method === null ? env.REQUEST_METHOD : method;
+    const requestMethod = method === null ? env.REACT_APP_REQUEST_METHOD : method;
     this.requestConfig = {
       url,
       headers: this.requestHeaders,
@@ -83,16 +83,16 @@ class CommonHttp {
       withCredentials: this.withCredentials,
       baseURL: env.API_LOCATION,
     };
-    
+
     if (requestMethod === "get") {
       this.requestConfig.params = this.params;
     }
-    
+
     if (requestMethod === "post") {
       this.requestConfig.data = this.params;
     }
   }
-  
+
   /**
    * 处理响应错误
    */
@@ -110,14 +110,14 @@ class CommonHttp {
     }
     reject(resultData);
   }
-  
+
   /**
    * 响应拦截器
    */
   responseInterceptor(resolve, reject, result) {
     const {responseAdapter} = this;
     const resultData = result.data;
-    
+
     if (result.status === 200) {
       switch (resultData.state) {
         case 0:
@@ -135,13 +135,13 @@ class CommonHttp {
       errorTip(`未知错误 ${result}`);
     }
   }
-  
+
   initConfig() {
     this.createRequestHeaders();
     this.createRequestParams();
     this.requestInterceptor();
   }
-  
+
   request() {
     return new Promise((resolve, reject) => {
       axios(this.requestConfig).then((result) => {
@@ -152,14 +152,14 @@ class CommonHttp {
       });
     });
   }
-  
+
   http({url, params, method = null, errorCodes = {}, responseAdapter = data => data}) {
     this.url = url;
     this.params = params;
     this.method = method;
     this.errorCodes = errorCodes;
     this.responseAdapter = responseAdapter;
-    
+
     this.initConfig();
     return this.request();
   }

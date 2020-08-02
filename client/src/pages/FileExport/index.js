@@ -1,7 +1,7 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import {Button} from 'antd';
-import api from '@/api'
+import * as file from '@/api/file'
 
 class FileExport extends React.Component {
 	constructor(props) {
@@ -10,7 +10,7 @@ class FileExport extends React.Component {
 	}
 	exportBtnClick = (e) => {
 		this.setState({isLoading: true});
-		api.file.ymarkInfoExport().then((value) => {
+		file.ymarkInfoExport().then((value) => {
 			console.log(value);
 		}).catch((err) => {
 			console.log(err);

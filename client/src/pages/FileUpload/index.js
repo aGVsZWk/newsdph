@@ -1,8 +1,8 @@
-import React, { Component } from 'react';
+import React, {Component, Fragment} from 'react';
 
 import { Upload, message, Button } from 'antd';
 import { UploadOutlined } from '@ant-design/icons';
-import api from '@/api'
+import * as file from '@/api/file'
 
 
 class FileUpload extends Component {
@@ -13,7 +13,9 @@ class FileUpload extends Component {
   }
 
   componentWillMount(){
-    api.file
+    const env = process.env;
+    console.log(env);
+    file
     .heartBeat()
     .then((res) => {
       console.log(res)
@@ -31,14 +33,14 @@ class FileUpload extends Component {
   render() {
     const props = {
       name: 'file',
-      action: 'https://127.0.0.1:8000/user/uploadFileList',
+      action: 'http://127.0.0.1:8000/user/uploadFiles',
       // headers: {
       //   authorization: 'authorization-text',
       // },
       "multiple": true,
       // "accept": ['.mif', '.mid'],
       "showUploadList": true,
-      "withCredentials": true,
+      // "withCredentials": true,
       onChange(info) {
         if (info.file.status !== 'uploading') {
           console.log(info.file, info.fileList);
@@ -52,11 +54,16 @@ class FileUpload extends Component {
     };
 
     return (
-      <Upload {...props}>
-        <Button>
-          <UploadOutlined /> Click to Upload
-        </Button>
-      </Upload>
+      <Fragment>
+        <Upload {...props}>
+          <Button>
+            <UploadOutlined /> Click to Upload
+          </Button>
+        </Upload>
+        <Upload>
+
+        </Upload>
+      </Fragment>
     )
   }
 
