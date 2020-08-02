@@ -27,7 +27,8 @@ const errorTip = (msg) => {
 
 
 class CommonHttp {
-  constructor() {
+  constructor(apiLocation) {
+    this.apiLocation = apiLocation
     this.url = "";
     this.params = null;
     this.method = "";
@@ -81,7 +82,7 @@ class CommonHttp {
       method: requestMethod,
       timeout: 1000 * 10,
       withCredentials: this.withCredentials,
-      baseURL: env.API_LOCATION,
+      baseURL: this.apiLocation,
     };
 
     if (requestMethod === "get") {
@@ -119,15 +120,16 @@ class CommonHttp {
     const resultData = result.data;
 
     if (result.status === 200) {
-      switch (resultData.state) {
+      switch (resultData.code) {
         case 0:
+        case 200:
           resolve(responseAdapter(resultData));
           break;
         case 1:
           this.handleError(reject, resultData);
           break;
         default:
-          errorTip(`未知状态 ${resultData.state}`);
+          errorTip(`未知状态 ${resultData.code}`);
           reject(resultData);
           break;
       }

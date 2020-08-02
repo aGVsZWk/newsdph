@@ -6,7 +6,6 @@ profile = {
     # phone, register_time_gt, register_time_lt, register_time_gte,
     # register_time_lte, login_time_gt, login_time_lt, login_time_gte,
     # login_time_lte, confirmed, locked, active, role, order, desc
-
     "name": fields.Str(),
     "sex": fields.Str(),
     "age": fields.Int(),
@@ -17,4 +16,4 @@ profile = {
     "email": fields.Str(),
     "page": fields.Integer(),
     "page_size": fields.Integer()
-    }
+}

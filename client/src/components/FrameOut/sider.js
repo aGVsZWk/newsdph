@@ -30,10 +30,11 @@ const SiderMenuUI = (props) => {
 				<Menu.Item disabled key={'site_menu4'}>Jere 西甲风云</Menu.Item>
 				<Menu.Item disabled key={'site_menu5'}>Jere 欧冠之夜</Menu.Item>
 				<Menu.Item disabled key={'site_menu6'}>Jere Die</Menu.Item>
-				<Menu.Item disabled key={'site_menu6'}>垃圾 Rock</Menu.Item>
-				<Menu.Item disabled key={'site_menu6'}>金属 Rock</Menu.Item>
-				<Menu.Item disabled key={'site_menu6'}>Jere 交响曲</Menu.Item>
-				<Menu.Item disabled key={'site_menu7'}>Jere 超清壁纸</Menu.Item>
+				<Menu.Item disabled key={'site_menu7'}>Jere Live</Menu.Item>
+				<Menu.Item disabled key={'site_menu8'}>垃圾 Rock</Menu.Item>
+				<Menu.Item disabled key={'site_menu9'}>金属 Rock</Menu.Item>
+				<Menu.Item disabled key={'site_menu10'}>Jere 交响曲</Menu.Item>
+				<Menu.Item disabled key={'site_menu11'}>Jere 超清壁纸</Menu.Item>
 			</Menu>
 		</Sider>
 	)

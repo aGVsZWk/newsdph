@@ -1,12 +1,12 @@
 import CommonHttp from "./http";
 
 class HttpForm extends CommonHttp {
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
     // this.withCredentials = true
     this.headerContentType = "application/x-www-form-urlencoded";
   }
-  
+
   createRequestParams() {
     let data = "";
     Object.keys(this.params).forEach((objKey) => {
@@ -22,7 +22,7 @@ export class HttpFormMultipart extends CommonHttp {
     // this.withCredentials = true
     this.headerContentType = "multipart/form-data";
   }
-  
+
   createRequestParams() {
     const formData = new FormData();
     Object.keys(this.params).forEach((objKey) => {

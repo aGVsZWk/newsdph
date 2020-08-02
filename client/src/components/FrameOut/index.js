@@ -41,8 +41,8 @@ render() {
                 margin: 0,
                 minHeight: 280,
             }}>
-            <Route path='/music' exact component={BlackMusic}></Route>
-            <Route path='/todo' exact component={TodoList}></Route>
+            <Route path='/music' component={BlackMusic}></Route>
+            <Route path='/todo' component={TodoList}></Route>
           </Content>
         </Layout>
       </Layout>

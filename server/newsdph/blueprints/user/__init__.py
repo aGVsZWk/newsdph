@@ -2,4 +2,4 @@ from flask import Blueprint
 
 user_bp = Blueprint('user', __name__)
 
-from .api.online import *   # noqa
+from .api import *   # noqa
