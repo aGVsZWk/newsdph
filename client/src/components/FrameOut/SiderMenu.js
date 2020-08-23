@@ -3,15 +3,13 @@ import {Layout, Menu, Breadcrumb, Row, Col, Dropdown, Avatar, Badge} from "antd"
 import {UserOutlined, LaptopOutlined, NotificationOutlined, SettingFilled, DownOutlined} from "@ant-design/icons";
 import {Link, Route, Redirect} from 'react-router-dom'
 import {BlackMusic} from '@/pages'
-import HeaderUI from './header'
 
 const {SubMenu} = Menu;
 const {Header, Content, Sider} = Layout;
 
 
-const SiderMenuUI = (props) => {
+const SiderMenu = (props) => {
 	return (
-		<Sider width={200} className="site-layout-background">
 			<Menu
 				mode="inline"
 				defaultSelectedKeys={["site_menu0"]}
@@ -36,9 +34,8 @@ const SiderMenuUI = (props) => {
 				<Menu.Item disabled key={'site_menu10'}>Jere 交响曲</Menu.Item>
 				<Menu.Item disabled key={'site_menu11'}>Jere 超清壁纸</Menu.Item>
 			</Menu>
-		</Sider>
 	)
 }
 
 
-export default SiderMenuUI
+export default SiderMenu

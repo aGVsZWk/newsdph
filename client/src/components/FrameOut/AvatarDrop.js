@@ -3,13 +3,12 @@ import {Layout, Menu, Breadcrumb, Row, Col, Dropdown, Avatar, Badge} from "antd"
 import {UserOutlined, LaptopOutlined, NotificationOutlined, SettingFilled, DownOutlined} from "@ant-design/icons";
 import {Link, Route, Redirect} from 'react-router-dom'
 import {BlackMusic} from '@/pages'
-import HeaderUI from './header'
 
 const {SubMenu} = Menu;
 const {Header, Content, Sider} = Layout;
 
 
-const HeaderAvatarDropUI = (props) => (
+const HeaderAvatarDrop = (props) => (
     <Menu>
       <Menu.Item key="/admin/notify">
         <div>
@@ -29,4 +28,4 @@ const HeaderAvatarDropUI = (props) => (
     </Menu>
 );
 
-export default HeaderAvatarDropUI
+export default HeaderAvatarDrop

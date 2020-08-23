@@ -2,27 +2,27 @@ import React, { Component } from 'react';
 import {Link, Route, Redirect} from 'react-router-dom'
 import {Layout, Row, Col, Dropdown, Avatar, Badge} from "antd";
 import {UserOutlined, LaptopOutlined, NotificationOutlined, SettingFilled, DownOutlined} from "@ant-design/icons";
-import HeaderAvatarDropUI from './headerAvatarDrop'
+import '@/css/header.less'
+import {LOGO_URL, AVATAR_URL} from '@/constants/urls'
+import urls from '@/constants'
 
 const {Header} = Layout;
-
-const HeaderUI = (props) => {
+const TopHeader = (props) => {
 	return (
-		<Header>
+		<Header className='top'>
 			<Row>
-				<Col span={8}>
-					<h2><Link to="/" style={{ color: "#fff"}}>Jerenme</Link></h2>
+				<Col span={1}>
+					<img height="40px" src="./logo.svg"></img>
+				</Col>
+				<Col span={7}>
+					<h2><Link to="/" className='title'>艺术是灵魂之药</Link></h2>
 				</Col>
 				<Col span={3} offset={13}>
-					<div style={{
-						color: "#fff",
-					}}>
-						<Dropdown overlay={HeaderAvatarDropUI}>
+					<div>
+						<Dropdown overlay={props.dropDown}>
 							<Badge count={25}>
-								<div style={{
-									color: "#fff",
-								}}>
-									<Avatar src="https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png" />
+								<div className='avatar'>
+									<Avatar src={AVATAR_URL} />
 									欢迎您 游客 !
 									<DownOutlined />
 								</div>
@@ -32,7 +32,7 @@ const HeaderUI = (props) => {
 				</Col>
 			</Row>
 		</Header>
-	)
+)
 }
 
-export default HeaderUI
+export default TopHeader

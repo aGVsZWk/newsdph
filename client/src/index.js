@@ -16,7 +16,7 @@ import {BrowserRouter as Router, Route, Switch, Redirect} from "react-router-dom
 import {commonRoutes} from "@/routers";
 
 import "@/css/index.less";
-import '@/css/BlackMusic.scss'
+// import '@/css/BlackMusic.scss'
 
 ReactDOM.render(
   <ConfigProvider locale={zhCN}>
